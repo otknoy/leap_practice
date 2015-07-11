@@ -1,0 +1,15 @@
+<DOCTYPE! html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <script src="./lib/leap-0.6.4.min.js"></script>
+    </head>
+    <script>
+    Leap.loop({enableGestures: true}, function(frame){
+  console.log(frame.fingers.length);
+      });
+    </script>
+    <body>
+    </body>
+  </html>
+  
