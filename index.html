@@ -5,9 +5,20 @@
       <script src="./lib/leap-0.6.4.min.js"></script>
     </head>
     <script>
-    Leap.loop({enableGestures: true}, function(frame){
-  console.log(frame.fingers.length);
-      });
+     var controller = Leap.loop(function(frame){
+    if(frame.hands.length > 0)
+    {
+        var hand = frame.hands[0];
+        var position = hand.palmPosition;
+        var velocity = hand.palmVelocity;
+        var direction = hand.direction;
+     }
+       console.log(position);
+});
+
+
+
+     
     </script>
     <body>
     </body>
