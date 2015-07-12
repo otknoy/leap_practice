@@ -6,15 +6,21 @@
     </head>
     <script>
      var controller = Leap.loop(function(frame){
-    if(frame.hands.length > 0)
-    {
-        var hand = frame.hands[0];
-        var position = hand.palmPosition;
-        var velocity = hand.palmVelocity;
-        var direction = hand.direction;
-     }
-       console.log(position);
-});
+       if(frame.hands.length == 2)
+       {
+         var hand1 = frame.hands[0];
+	 var hand2 = frame.hands[1];
+         var position1 = hand1.palmPosition;
+         var velocity1 = hand1.palmVelocity;
+         var direction1 = hand1.direction;
+	 var position2 = hand2.palmPosition;
+         var velocity2 = hand2.palmVelocity;
+         var direction2 = hand2.direction;
+       }
+       console.log("hand1"+" "+position1);
+       console.log("hand2"+" "+position2);
+      
+     });
 
 
 
