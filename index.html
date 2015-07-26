@@ -3,27 +3,72 @@
     <head>
       <meta charset="UTF-8">
       <script src="./lib/leap-0.6.4.min.js"></script>
+      <script src="./lib/processing.min.js"></script>
     </head>
-    <script>
-     var controller = Leap.loop(function(frame){
-       if(frame.hands.length == 2)
-       {
-         var hand1 = frame.hands[0];
-	 var hand2 = frame.hands[1];
-         var position1 = hand1.palmPosition;
-         var velocity1 = hand1.palmVelocity;
-         var direction1 = hand1.direction;
-	 var position2 = hand2.palmPosition;
-         var velocity2 = hand2.palmVelocity;
-         var direction2 = hand2.direction;
-       }
-       console.log("hand1"+" "+position1);
-       console.log("hand2"+" "+position2);
-      
-     });
-
-    </script>
     <body>
+
+      <p><canvas id="sketch" width="800" height="800"></canvas></p>
+
+      <script type="text/javascript">
+	var controller = new Leap.Controller({
+	  host: '127.0.0.1',
+	  port: 6437,
+	  enableGestures: true,
+	  frameEventName: 'animationFrame',
+	  useAllPlugins: true
+	});
+	controller.connect();
+
+
+	function sketchProc(processing) {
+	  processing.setup = function(){
+	    processing.size(480, 480, processing.P3D);
+
+	    processing.fill(processing.color(255, 0, 255));
+	    processing.stroke(processing.color(255, 0, 0))
+
+	  }
+
+
+	  processing.draw = function() {
+	    processing.background(0);
+
+	    var frame = controller.frame();
+
+	    if(frame.hands.length == 0) {
+	      return;
+	    }
+	    console.log(frame.hands.length);
+
+	    var hand = frame.hands[0];
+
+	    hand.fingers.forEach(function(finger) {
+	      processing.pushMatrix();
+
+	      var x = finger.tipPosition[0];
+	      var y = finger.tipPosition[1];
+	      var z = finger.tipPosition[2];
+
+	      console.log("x: " + x, ", y: ", + y + ", z: " + z);
+
+	      processing.translate(processing.width/2, processing.height/2, 0);
+
+	      processing.translate(x, z, y);
+
+	      processing.sphere(12);
+
+
+	      processing.popMatrix();
+	    });
+
+	  }
+	}
+
+	var canvas = document.getElementById("sketch");
+	// attaching the sketchProc function to the canvas
+	var p = new Processing(canvas, sketchProc);
+	// p.exit(); to detach it
+      </script>
+
     </body>
   </html>
-  
