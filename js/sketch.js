@@ -32,8 +32,14 @@ function sketchProc(processing) {
 
 	frame.gestures.forEach(function(gesture){
 	    if (gesture.type == "keyTap") {
-		isDrawing = !isDrawing;
-		console.log("key tapped!!!");
+		if (!isDrawing) { // start point
+		    points = [];
+		} else {          // end point
+		    console.log(points);
+		}
+
+	    	isDrawing = !isDrawing;
+	    	console.log("key tapped!!!");
 	    }
 	});
 
