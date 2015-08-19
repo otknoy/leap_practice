@@ -36,6 +36,8 @@ function sketchProc(processing) {
 	var x = index.tipPosition[0];
 	var y = index.tipPosition[1];
 	var z = index.tipPosition[2];
+	var point = {"x": x, "y": y, "z": z};
+	points.push(point);
 	console.log("x: " + x, ", y: ", + y + ", z: " + z);
 
 	processing.pushMatrix();
@@ -44,8 +46,10 @@ function sketchProc(processing) {
 	processing.translate(x, -y, z);
 
 	processing.sphere(12);
-
 	processing.popMatrix();
+
+	console.log(points);
+	console.log(points.length);
     };
 }
 
