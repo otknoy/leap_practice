@@ -9,66 +9,7 @@
 
       <p><canvas id="sketch" width="800" height="800"></canvas></p>
 
-      <script type="text/javascript">
-	var controller = new Leap.Controller({
-	  host: '127.0.0.1',
-	  port: 6437,
-	  enableGestures: true,
-	  frameEventName: 'animationFrame',
-	  useAllPlugins: true
-	});
-	controller.connect();
-
-
-	function sketchProc(processing) {
-	  processing.setup = function(){
-	    processing.size(480, 480, processing.P3D);
-
-	    processing.fill(processing.color(255, 0, 255));
-	    processing.stroke(processing.color(255, 0, 0))
-
-	  }
-
-
-	  processing.draw = function() {
-	    processing.background(0);
-
-	    var frame = controller.frame();
-
-	    if(frame.hands.length == 0) {
-	      return;
-	    }
-	    console.log(frame.hands.length);
-
-	    var hand = frame.hands[0];
-
-	    hand.fingers.forEach(function(finger) {
-	      processing.pushMatrix();
-
-	      var x = finger.tipPosition[0];
-	      var y = finger.tipPosition[1];
-	      var z = finger.tipPosition[2];
-
-	      console.log("x: " + x, ", y: ", + y + ", z: " + z);
-
-	      processing.translate(processing.width/2, processing.height/2, 0);
-
-	      processing.translate(x, z, y);
-
-	      processing.sphere(12);
-
-
-	      processing.popMatrix();
-	    });
-
-	  }
-	}
-
-	var canvas = document.getElementById("sketch");
-	// attaching the sketchProc function to the canvas
-	var p = new Processing(canvas, sketchProc);
-	// p.exit(); to detach it
-      </script>
+      <script type="text/javascript" src="js/sketch.js"></script>
 
     </body>
   </html>
