@@ -36,6 +36,10 @@ function sketchProc(processing) {
 		    points = [];
 		} else {          // end point
 		    console.log(points);
+
+		    // output
+		    var o = document.getElementById("output");
+		    o.innerHTML = JSON.stringify(points);
 		}
 
 	    	isDrawing = !isDrawing;
