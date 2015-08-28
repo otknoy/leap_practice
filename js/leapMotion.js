@@ -1,4 +1,3 @@
-
 var controller = new Leap.Controller({
     host: '127.0.0.1',
     port: 6437,
@@ -31,9 +30,11 @@ Leap.loop({enableGestures: true}, function(frame){
     }
 
     var hand = frame.hands[0];
-    var index = hand.indexFinger;
+    var finger = hand.indexFinger;
     var point = getFingertip(finger);
     points.push(point);
+
+    
 });
 
 function getFingertip(finger){
