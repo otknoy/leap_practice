@@ -31,7 +31,6 @@ Leap.loop({enableGestures: true}, function(frame){
 
     var hand = frame.hands[0];
     var finger = hand.indexFinger;
-    var point = getFingertip(finger);
     points.push(point);
 
     
@@ -45,6 +44,9 @@ function getFingertip(finger){
     return point;
 }
 
+var point = getFingertip(finger);
+
+
 function keyTapped(frame){
     var gestures = frame.gestures;
     for (var i = 0; i < gestures.length; i++){
@@ -54,4 +56,3 @@ function keyTapped(frame){
     }
     return false;
 }
-    
