@@ -8,6 +8,7 @@ var controller = new Leap.Controller({
 controller.connect();
 
 
+var point;
 var points = [];
 var isDrawing = false;
 
@@ -31,9 +32,9 @@ Leap.loop({enableGestures: true}, function(frame){
 
     var hand = frame.hands[0];
     var finger = hand.indexFinger;
-    points.push(point);
+    point = getFingertip(finger);
 
-    
+    points.push(point);
 });
 
 function getFingertip(finger){
@@ -43,9 +44,6 @@ function getFingertip(finger){
 		};
     return point;
 }
-
-var point = getFingertip(finger);
-
 
 function keyTapped(frame){
     var gestures = frame.gestures;
