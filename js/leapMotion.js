@@ -8,7 +8,7 @@ var controller = new Leap.Controller({
 controller.connect();
 
 
-var point;
+var point = (0, 0, 0);
 var points = [];
 var isDrawing = false;
 
@@ -25,6 +25,7 @@ Leap.loop({enableGestures: true}, function(frame){
 	    points = [];
 	}else{
 	    console.log("end gesture");
+	    console.log(points);
 	}
 
 	isDrawing = !isDrawing;
