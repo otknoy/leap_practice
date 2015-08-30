@@ -7,13 +7,14 @@ function sketchProc(processing) {
 
     processing.draw = function() {
 	drawPoint(point);
-	function drawPoint(point){
-	    processing.pushMatrix();
-	    processing.translate(point.x, point.y, point.z);
-	    processing.sphere(12);
-	    processing.popMatrix();
-	}
     };
+
+    function drawPoint(point){
+	processing.pushMatrix();
+	processing.translate(point.x, point.y, point.z);
+	processing.sphere(12);
+	processing.popMatrix();
+    }
 }
 
 var canvas = document.getElementById("sketch");
