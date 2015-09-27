@@ -1,4 +1,4 @@
-var Sketch = function(id) {
+var Sketch = function(id, enableMouseDrag) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
 
@@ -6,7 +6,9 @@ var Sketch = function(id) {
     this.mouseX = 0;
     this.mouseY = 0;
 
-    this.enableMouseDrag();
+    if (enableMouseDrag) {
+	this.enableMouseDrag();
+    }
 };
 
 Sketch.prototype.drawCircle =  function(x, y) {
