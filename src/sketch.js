@@ -24,7 +24,8 @@ Sketch.prototype.clear = function() {
 
 
 Sketch.prototype.enableMouseDrag = function() {
-    var sketch = this;
+    //    var sketch = this;
+    var sketch = new Sketch('sketch');
     var canvas = sketch.canvas;
 
     canvas.addEventListener('mousedown', function(e) {
@@ -41,8 +42,8 @@ Sketch.prototype.enableMouseDrag = function() {
     	    var rect = e.target.getBoundingClientRect();
     	    sketch.mouseX = e.clientX - rect.left;
     	    sketch.mouseY = e.clientY - rect.top;
-
-    	    sketch.drawCircle(sketch.mouseX, sketch.mouseY);
+	    sketch.drawCircle(x, y);
+//    	    sketch.drawCircle(sketch.mouseX, sketch.mouseY);
 	}
     }, false);
 };
