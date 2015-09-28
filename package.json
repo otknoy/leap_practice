@@ -1,0 +1,24 @@
+{
+    "name": "leap_practice",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "dependencies": {
+	"dtw": "^0.0.3",
+	"jquery": "^2.1.4"
+    },
+    "devDependencies": {},
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/otknoy/leap_practice.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+	"url": "https://github.com/otknoy/leap_practice/issues"
+    },
+    "homepage": "https://github.com/otknoy/leap_practice#readme"
+}
