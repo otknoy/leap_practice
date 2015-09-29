@@ -1,7 +1,7 @@
 var Sketch = function(id, enableMouseDrag) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
-
+    this.context.translate(this.canvas.width/2, this.canvas.height/2);
     this.mousePressed = false;
     this.mouseX = 0;
     this.mouseY = 0;
@@ -20,11 +20,11 @@ Sketch.prototype.drawCircle =  function(x, y) {
 
 Sketch.prototype.setStrokeStyle =  function(color) {
     this.context.strokeStyle = color;
-//    this.context.stroke();
+    this.context.stroke();
 };
 
 Sketch.prototype.clear = function() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.clearRect(this.canvas.width/2, this.canvas.height/2, this.canvas.width, this.canvas.height);
 };
 
 

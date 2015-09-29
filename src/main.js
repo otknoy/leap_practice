@@ -16,7 +16,6 @@ Leap.loop({enableGestures: true}, function(frame){
 	if(!isDrawing){
 	    console.log("start gesture");
 	    points = [];
-//	    sketch.setStrokeStyle(drawColor);
 	}else{
 	    console.log("end gesture");
 	    console.log(points);
@@ -24,13 +23,14 @@ Leap.loop({enableGestures: true}, function(frame){
 	}
 
 	isDrawing = !isDrawing;
+
     }
 
     var hand = frame.hands[0];
     var finger = hand.indexFinger;
     point = getFingertip(finger);
     points.push(point);
-    sketch.drawCircle(point.x, point.y);
+    sketch.drawCircle(point.x, -point.y);
 });
 
 function getFingertip(finger){
