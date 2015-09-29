@@ -24,7 +24,7 @@ Sketch.prototype.setStrokeStyle =  function(color) {
 };
 
 Sketch.prototype.clear = function() {
-    this.context.clearRect(-this.canvas.width/2, this.canvas.height/2, this.canvas.width, this.canvas.height);
+    this.context.clearRect(-this.canvas.width/2, -this.canvas.height/2, this.canvas.width, this.canvas.height);
 };
 
 

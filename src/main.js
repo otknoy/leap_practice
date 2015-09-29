@@ -41,16 +41,17 @@ Leap.loop({enableGestures: true}, function(frame){
 	    console.log("end gesture");
 	    console.log(points);
 	    sketch.setStrokeStyle(showColor);
-	//     for (var i = 0; i < points.length; i++) {
+
+	    //     for (var i = 0; i < points.length; i++) {
 	// 	var cost = dtw.compute(points[i], ts[i]);
-	// 	var path = dtw.path();
+	    // 	var path = dtw.path();
 	// 	console.log("hey");
 	// }
 	    
 	}
 
 	isDrawing = !isDrawing;
-
+	sketch.clear();
     }
 
     var hand = frame.hands[0];
@@ -58,7 +59,7 @@ Leap.loop({enableGestures: true}, function(frame){
     point = getFingertip(finger);
     points.push(point);
     sketch.drawCircle(point.x, -point.y);
-   
+
 });
 
 
