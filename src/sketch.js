@@ -18,6 +18,11 @@ Sketch.prototype.drawCircle =  function(x, y) {
     this.context.stroke();
 };
 
+Sketch.prototype.setStrokeStyle =  function(color) {
+    this.context.strokeStyle = color;
+//    this.context.stroke();
+};
+
 Sketch.prototype.clear = function() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
