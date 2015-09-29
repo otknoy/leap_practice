@@ -13,7 +13,7 @@ var Sketch = function(id, enableMouseDrag) {
 
 Sketch.prototype.drawCircle =  function(x, y) {
     this.context.beginPath();
-    this.context.strokeStyle = '#6DD900';
+//    this.context.strokeStyle = '#6DD900';
     this.context.arc(x, y, 12, 0, Math.PI*2, false);
     this.context.stroke();
 };

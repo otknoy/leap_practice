@@ -3,7 +3,10 @@ var dtw = new DTW();
 var $ = require('jquery');
 var Leap = require('leapjs');
 var Sketch = require('./sketch.js');
+var showColor = '#87ceeb';
+var drawColor = '#000080';
 var sketch = new Sketch('sketch');
+sketch.setStrokeStyle(showColor);
 var point = (0, 0, 0);
 var points = [];
 var ts =[
@@ -15,7 +18,7 @@ var ts =[
 ];
 
 var isDrawing = false;
-var drawColor = '#000080';
+
 
 
 
@@ -25,22 +28,24 @@ Leap.loop({enableGestures: true}, function(frame){
 	return;
     }
     
-    
+   
     if(keyTapped(frame)){
 	console.log("key tapped!!!");
+
 	if(!isDrawing){
 	    console.log("start gesture");
 	    points = [];
+	    sketch.setStrokeStyle(drawColor);
 	   
 	}else{
 	    console.log("end gesture");
 	    console.log(points);
-
-	    for (var i = 0; i < points.length; i++) {
-		var cost = dtw.compute(points[i], ts[i]);
-		var path = dtw.path();
-		console.log("hey");
-	}
+	    sketch.setStrokeStyle(showColor);
+	//     for (var i = 0; i < points.length; i++) {
+	// 	var cost = dtw.compute(points[i], ts[i]);
+	// 	var path = dtw.path();
+	// 	console.log("hey");
+	// }
 	    
 	}
 
