@@ -9,13 +9,12 @@ var sketch = new Sketch('sketch');
 sketch.setStrokeStyle(showColor);
 var point = (0, 0, 0);
 var points = [];
-var ts =[
-	{"x": 1, "y": 0, "z": 0},
-	{"x": 2, "y": 0, "z": 0},
-	{"x": 3, "y": 0, "z": 0},
-	{"x": 4, "y": 0, "z": 0},
-	{"x": 5, "y": 0, "z": 0}
-];
+var point_x = 0;
+var points_x = [];
+var points_y = [];
+var points_z = [];
+
+var xs =[1,2,3,4,5,6,7,8,9,10];
 
 var isDrawing = false;
 
@@ -40,13 +39,14 @@ Leap.loop({enableGestures: true}, function(frame){
 	}else{
 	    console.log("end gesture");
 	    console.log(points);
+	    console.log(points_x);
 	    sketch.setStrokeStyle(showColor);
 
-	    //     for (var i = 0; i < points.length; i++) {
-	// 	var cost = dtw.compute(points[i], ts[i]);
-	    // 	var path = dtw.path();
-	// 	console.log("hey");
-	// }
+	    for (var i = 0; i < xs.length; i++) {
+		var cost = dtw.compute(points_x[i], xs[i]);
+		var path = dtw.path();
+		console.log("hey");
+	}
 	    
 	}
 
@@ -58,6 +58,8 @@ Leap.loop({enableGestures: true}, function(frame){
     var finger = hand.indexFinger;
     point = getFingertip(finger);
     points.push(point);
+    point_x = point.x;
+    points_x.push(point_x);
     sketch.drawCircle(point.x, -point.y);
 
 });
