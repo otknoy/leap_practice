@@ -9,7 +9,6 @@ var sketch = new Sketch('sketch');
 sketch.setStrokeStyle(showColor);
 var point = (0, 0, 0);
 var points = [];
-var point_x = 0;
 var points_x = [];
 var points_y = [];
 var points_z = [];
@@ -38,14 +37,21 @@ Leap.loop({enableGestures: true}, function(frame){
 	   
 	}else{
 	    console.log("end gesture");
-	    console.log(points);
-	    console.log(points_x);
+//	    console.log(points);
+	    for (var j in points) {
+		var points_time = points[j];
+		//console.log(points_time);
+		console.log(points_time.x);
+		points_x.push(points_time.x);
+		console.log(points_x);
+		
+	    }
 	    sketch.setStrokeStyle(showColor);
 
 	    for (var i = 0; i < xs.length; i++) {
-		var cost = dtw.compute(points_x[i], xs[i]);
-		var path = dtw.path();
-		console.log("hey");
+	    	var cost = dtw.compute(points_x[i], xs[i]);
+	    	var path = dtw.path();
+	    	console.log("hey");
 	}
 	    
 	}
@@ -58,8 +64,6 @@ Leap.loop({enableGestures: true}, function(frame){
     var finger = hand.indexFinger;
     point = getFingertip(finger);
     points.push(point);
-    point_x = point.x;
-    points_x.push(point_x);
     sketch.drawCircle(point.x, -point.y);
 
 });
