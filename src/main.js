@@ -43,16 +43,18 @@ Leap.loop({enableGestures: true}, function(frame){
 		//console.log(points_time);
 		console.log(points_time.x);
 		points_x.push(points_time.x);
-		console.log(points_x);
+//		console.log(points_x);
 		
 	    }
 	    sketch.setStrokeStyle(showColor);
+	    console.log(points_time);
+	   
 
-	    for (var i = 0; i < xs.length; i++) {
-	    	var cost = dtw.compute(points_x[i], xs[i]);
+		console.log(points_x);
+		console.log(xs);
+	    	var cost = dtw.compute(points_x, xs);
 	    	var path = dtw.path();
-	    	console.log("hey");
-	}
+	    	console.log(cost);
 	    
 	}
 
