@@ -1,3 +1,4 @@
+
 var DTW = require('dtw');
 var dtw = new DTW();
 var $ = require('jquery');
@@ -17,7 +18,7 @@ var xs =[-33.3692,-34.1788,-34.4417,-34.8203,-34.5917,-34.5219,-34.4015,-34.3309
 	
 
 var isDrawing = false;
-
+var isRecording = false;
 
 
 
@@ -28,7 +29,7 @@ Leap.loop({enableGestures: true}, function(frame){
     }
     
    
-    if(keyTapped(frame)){
+    if(isRecording == true){
 	console.log("key tapped!!!");
 
 	if(!isDrawing){
@@ -83,12 +84,16 @@ function getFingertip(finger){
     return point;
 }
 
-function keyTapped(frame){
-    var gestures = frame.gestures;
-    for (var i = 0; i < gestures.length; i++){
-	if(gestures[i].type == "keyTap"){
-	    return true;
-	}
-    }
-    return false;
-}
+// function keyTapped(frame){
+//     var gestures = frame.gestures;
+//     for (var i = 0; i < gestures.length; i++){
+// 	if(gestures[i].type == "keyTap"){
+// 	    return true;
+// 	}
+//     }
+//     return false;
+// }
+
+function recordFinger(){
+    isRecording = !isRecording;
+}    
