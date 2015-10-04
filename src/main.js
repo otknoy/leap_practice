@@ -61,14 +61,14 @@ function transformXYZ(points) {
 
 function recordFinger(){
     if (isRecording) {
-	concole.log('end');
+	console.log('end');
 
 	// compute cost
 	var point = transformXYZ(points);
 	var cost = dtw.compute(point.X, xs);
 	console.log(cost);
     } else {
-	concole.log('begin');
+	console.log('begin');
     }
 
     isRecording = !isRecording;
