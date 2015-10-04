@@ -29,7 +29,7 @@ Leap.loop({enableGestures: true}, function(frame){
     }
     
    
-    if(isRecording == true){
+    if(!isRecording){
 	console.log("key tapped!!!");
 
 	if(!isDrawing){
