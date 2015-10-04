@@ -97,3 +97,5 @@ function getFingertip(finger){
 function recordFinger(){
     isRecording = !isRecording;
 }    
+
+$('#rec-button').click(recordFinger);
