@@ -1,4 +1,3 @@
-
 var DTW = require('dtw');
 var dtw = new DTW();
 var $ = require('jquery');
@@ -36,24 +35,16 @@ Leap.loop({enableGestures: true}, function(frame){
 	    console.log("start gesture");
 	    points = [];
 	    sketch.setStrokeStyle(drawColor);
-	   
 	}else{
 	    console.log("end gesture");
-//	    console.log(points);
 	    for (var j in points) {
 		var points_time = points[j];
-		//console.log(points_time);
-//		console.log("points_time.x" + points_time.x);
 		points_x.push(points_time.x);
 		points_y.push(points_time.y);
 		points_z.push(points_time.z);
-//		console.log(points_x);
-		
 	    }
 	    sketch.setStrokeStyle(showColor);
 
-//	    console.log("points_x:"+ points_x);
-//	    console.log(xs);
 	    var cost = dtw.compute(points_x, xs);
 	    var path = dtw.path();
 	    console.log("cost:"+ cost);
@@ -83,16 +74,6 @@ function getFingertip(finger){
 		};
     return point;
 }
-
-// function keyTapped(frame){
-//     var gestures = frame.gestures;
-//     for (var i = 0; i < gestures.length; i++){
-// 	if(gestures[i].type == "keyTap"){
-// 	    return true;
-// 	}
-//     }
-//     return false;
-// }
 
 function recordFinger(){
     isRecording = !isRecording;
