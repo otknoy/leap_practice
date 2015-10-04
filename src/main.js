@@ -23,7 +23,7 @@ Leap.loop({enableGestures: true}, function(frame){
 
     if (!isRecording) {
 	sketch.clear();
-
+	points = [];
 	sketch.setStrokeStyle(showColor);
 	sketch.drawCircle(point.x, -point.y);
 
