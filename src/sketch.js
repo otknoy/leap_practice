@@ -1,7 +1,7 @@
 var Sketch = function(id, enableMouseDrag) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
-
+    this.context.translate(this.canvas.width/2, this.canvas.height/2);
     this.mousePressed = false;
     this.mouseX = 0;
     this.mouseY = 0;
@@ -13,13 +13,18 @@ var Sketch = function(id, enableMouseDrag) {
 
 Sketch.prototype.drawCircle =  function(x, y) {
     this.context.beginPath();
-    this.context.strokeStyle = '#6DD900';
+//    this.context.strokeStyle = '#6DD900';
     this.context.arc(x, y, 12, 0, Math.PI*2, false);
     this.context.stroke();
 };
 
+Sketch.prototype.setStrokeStyle =  function(color) {
+    this.context.strokeStyle = color;
+    this.context.stroke();
+};
+
 Sketch.prototype.clear = function() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.clearRect(-this.canvas.width/2, -this.canvas.height/2, this.canvas.width, this.canvas.height);
 };
 
 
@@ -41,7 +46,6 @@ Sketch.prototype.enableMouseDrag = function() {
     	    var rect = e.target.getBoundingClientRect();
     	    sketch.mouseX = e.clientX - rect.left;
     	    sketch.mouseY = e.clientY - rect.top;
-
     	    sketch.drawCircle(sketch.mouseX, sketch.mouseY);
 	}
     }, false);
