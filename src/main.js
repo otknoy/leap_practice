@@ -187,17 +187,19 @@ function zClear(data){
     var n = data.length;
     for (var i = 0; i < n; i++) {
 	data[i].z = 0;
-    }
+    }    
 }
 
 
-var test = zClear(points);
-console.log(test);
+
 
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
 
+	zClear(points);
+	zClear(sample);
+	console.log("hoge");
 	var ts1 = changeOfPosition(points);
 	var ts2 = changeOfPosition(sample);
 
@@ -211,6 +213,10 @@ function recordFinger(){
 
 	var d = DTW.distance(ts1, ts2, distance);
 	console.log('d:'+d);
+	console.log(points);
+	console.log(sample);
+	console.log(ts1);
+	console.log(ts2);
 	// compute cost
 	
     } else {
