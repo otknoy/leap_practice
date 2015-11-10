@@ -183,11 +183,23 @@ function changeOfPosition(data) {
     return d;
 }
 
+function zClear(data){
+    var n = data.length;
+    for (var i = 0; i < n; i++) {
+	data[i].z = 0;
+    }    
+}
+
+
+
 
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
 
+	zClear(points);
+	zClear(sample);
+	console.log("hoge");
 	var ts1 = changeOfPosition(points);
 	var ts2 = changeOfPosition(sample);
 
@@ -201,6 +213,10 @@ function recordFinger(){
 
 	var d = DTW.distance(ts1, ts2, distance);
 	console.log('d:'+d);
+	console.log(points);
+	console.log(sample);
+	console.log(ts1);
+	console.log(ts2);
 	// compute cost
 	
     } else {
@@ -212,3 +228,6 @@ function recordFinger(){
 
 
 $('#rec-button').click(recordFinger);
+
+//leap motion で取った座標データを dtw に食わせる前に z の値を全部 0 にしたらいいんちゃうの？
+//時系列データを一つ渡したら、z の値を全部 0 にする関数を書くねや！
