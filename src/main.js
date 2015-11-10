@@ -183,6 +183,16 @@ function changeOfPosition(data) {
     return d;
 }
 
+function zClear(data){
+    var n = data.length;
+    for (var i = 0; i < n; i++) {
+	data[i].z = 0;
+    }
+}
+
+
+var test = zClear(points);
+console.log(test);
 
 function recordFinger(){
     if (isRecording) {
@@ -212,3 +222,6 @@ function recordFinger(){
 
 
 $('#rec-button').click(recordFinger);
+
+//leap motion で取った座標データを dtw に食わせる前に z の値を全部 0 にしたらいいんちゃうの？
+//時系列データを一つ渡したら、z の値を全部 0 にする関数を書くねや！
