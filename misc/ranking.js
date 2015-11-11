@@ -27,6 +27,22 @@ function searchTimeSeries(tsQuery, hits) {
 };
 
 
+var fruits = [
+   {name:"apple",price:100},
+   {name:"orange",price:98},
+   {name:"banana",price:50},
+   {name:"melon",price:500},
+   {name:"mango",price:398}
+]
+
+score.sort(function(a,b){
+    if(a.price<b.price) return -1;
+    if(a.price > b.price) return 1;
+    return 0;
+});
+console.log(fruits)
+
+
 // こんな感じで使う
 var result = searchTimeSeries(ts, 5);
 

@@ -4225,11 +4225,17 @@ function searchTimeSeries(tsQuery) {
 	var ts_S = changeOfPosition(samples[i].points);
 	var d = DTW.distance(ts_Q, ts_S, distance);
 	score.push(d);
+	score.sort(function(a,b){
+	    if(a < b) return -1;
+	    if(a > b) return 1;
+	    return 0;
+	});
     }
    // スコアでソート
    // 上位 hits 件を返す
    //  返したデータにスコアをつけとくといいかも
     //  よくわからないなら後回しで
+   
     console.log(score);
     return score;
 };
