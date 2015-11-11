@@ -1,4 +1,4 @@
-var sample =[
+var samples =[
     {
 	"name": "1",
 	"points": [ { x: -169.897, y: 110.723, z: 9.71903 },

@@ -10,13 +10,21 @@ var db = [ts0, ts1, ts2, ts3, ts4];
 
 function searchTimeSeries(tsQuery, hits) {
    // スコアの計算
-   // 全データ (db) との類似度を求める
+    // 全データ (db) との類似度を求める
+    var n = samples.length;
+    for (var i = 0; i < n; i++){
+	zClear(tsQuery);
+	zClear(samples[i]);
+	var ts_Q = changeOfPosition(tsQuery);
+	var ts_S = changeOfPosition(samples[i]);
+	var d = DTW.distance(ts_Q, ts_S, distance);
+    }
    // スコアでソート
    // 上位 hits 件を返す
    //  返したデータにスコアをつけとくといいかも
    //  よくわからないなら後回しで
-
-}
+    return d;
+};
 
 
 // こんな感じで使う
