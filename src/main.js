@@ -4224,10 +4224,13 @@ function searchTimeSeries(tsQuery) {
 	var ts_Q = changeOfPosition(tsQuery);
 	var ts_S = changeOfPosition(samples[i].points);
 	var d = DTW.distance(ts_Q, ts_S, distance);
-	score.push(d);
+	score.push({
+	    name:samples[i].name,
+	    score:d
+	});
 	score.sort(function(a,b){
-	    if(a < b) return -1;
-	    if(a > b) return 1;
+	    if(a.score < b.score) return -1;
+	    if(a.score > b.score) return 1;
 	    return 0;
 	});
     }
