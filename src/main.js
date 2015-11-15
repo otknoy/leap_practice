@@ -6,8 +6,10 @@ var Sketch = require('./sketch.js');
 var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
+//var fs = require('fs');
 var samples = require('./samples.json');
 
+//var samples = JSON.parse(fs.readFileSync('./samples.json', 'utf8'));
 
 
 
@@ -85,22 +87,22 @@ function searchTimeSeries(tsQuery) {
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
+    zClear(tsQuery);
+    var ts_Q = changeOfPosition(tsQuery);
     for (var i = 0; i < n; i++){
-	zClear(tsQuery);
 	zClear(samples[i].points);
-	var ts_Q = changeOfPosition(tsQuery);
 	var ts_S = changeOfPosition(samples[i].points);
 	var d = DTW.distance(ts_Q, ts_S, distance);
 	score.push({
 	    name:samples[i].name,
 	    score:d
 	});
-	score.sort(function(a,b){
-	    if(a.score < b.score) return -1;
-	    if(a.score > b.score) return 1;
-	    return 0;
-	});
     }
+    score.sort(function(a,b){
+	if(a.score < b.score) return -1;
+	if(a.score > b.score) return 1;
+	return 0;
+    });
    // スコアでソート
    // 上位 hits 件を返す
    //  返したデータにスコアをつけとくといいかも
