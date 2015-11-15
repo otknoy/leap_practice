@@ -6,9 +6,9 @@ var Sketch = require('./sketch.js');
 var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
-var Data = require('./samples.json');
+var samples = require('./samples.json');
 
-console.log(Data);
+
 
 
 var points = [];
