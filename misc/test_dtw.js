@@ -1,4 +1,4 @@
-var DTW = require('./dtw.js');
+var DTW = require('../src/dtw.js');
 
 
 var Point = function(x, y, z) {
@@ -31,7 +31,7 @@ var ts2 = [new Point(1, 1, 1),
 
 // 第3引数に距離関数を指定
 // この場合は、Pointオブジェクトの距離を求める関数を指定
-var d = DTW.distance(ts1, ts2, distance);
+var d = DTW.distance(ts1, ts2, distance, 5);
 
 console.log(ts1);
 console.log(ts2);
