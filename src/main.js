@@ -92,7 +92,7 @@ function searchTimeSeries(tsQuery) {
 	zClear(samples[i].points);
 	var ts_S = changeOfPosition(samples[i].points);
 //	console.log(ts_S);
-	var d = DTW.distance(ts_Q, ts_S, distance);
+	var d = DTW.distance(ts_Q, ts_S, distance, 10);
 
 		    
 	score.push({
