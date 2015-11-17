@@ -29,11 +29,11 @@ function createDtwMatrix(n, m) { //2次元配列の初期化
 DTW.distance = function(ts1, ts2, distFunc) {
     var n = ts1.length;
     var m = ts2.length;
-    var w = Math.max(5, Math.abs(n-m));
+    var w = Math.max(50, Math.abs(n-m));
     var dtw = createDtwMatrix(n, m);
 
     for (var i = 1; i < n; i++) {
-	for (var j = Math.max(1, i-1); j < Math.min(m, i+w); j++) {
+	for (var j = Math.max(1, i-w); j < Math.min(m, i+w); j++) {
 	    var cost = distFunc(ts1[i], ts2[j]);
 	    dtw[i][j] = cost + Math.min(dtw[i-1][j], dtw[i][j-1], dtw[i-1][j-1]);
 	}
