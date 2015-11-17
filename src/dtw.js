@@ -15,12 +15,12 @@ function createDtwMatrix(n, m) { //2次元配列の初期化
     var dtw = createMatrix(n, m);
 
     // init
-    for (var i = 1; i < n; i++) {
-	dtw[i][0] = Number.MAX_VALUE;
+    for (var i = 0; i < n; i++) {
+	for (var j = 0; j < m; j++) {
+	    dtw[i][j] = Number.MAX_VALUE;
+	}
     }
-    for (var j = 1; j < m; j++) {
-	dtw[0][j] = Number.MAX_VALUE;
-    }
+    
     dtw[0][0] = 0;
 
     return dtw;
@@ -33,7 +33,7 @@ DTW.distance = function(ts1, ts2, distFunc) {
     var dtw = createDtwMatrix(n, m);
 
     for (var i = 1; i < n; i++) {
-	for (var j = 1; j < m; j++) {
+	for (var j = Math.max(1, i-w); Math.min(m, i+w) < m; j++) {
 	    var cost = distFunc(ts1[i], ts2[j]);
 	    dtw[i][j] = cost + Math.min(dtw[i-1][j], dtw[i][j-1], dtw[i-1][j-1]);
 	}
