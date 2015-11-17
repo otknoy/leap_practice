@@ -1,6 +1,6 @@
 var DTW = {};
 
-function createMatrix(n, m) {
+function createMatrix(n, m) { //2次元配列を作っているだけ
     var d = new Array(n);
     for (var i = 0; i < d.length; i++) {
 	d[i] = new Array(m);
@@ -11,7 +11,7 @@ function createMatrix(n, m) {
     return d;
 }
 
-function createDtwMatrix(n, m) {
+function createDtwMatrix(n, m) { //2次元配列の初期化
     var dtw = createMatrix(n, m);
 
     // init
@@ -29,6 +29,7 @@ function createDtwMatrix(n, m) {
 DTW.distance = function(ts1, ts2, distFunc) {
     var n = ts1.length;
     var m = ts2.length;
+    var w = Math.max(5, Math.abs(n-m));
     var dtw = createDtwMatrix(n, m);
 
     for (var i = 1; i < n; i++) {
