@@ -1,45 +1,44 @@
 var DTW = {};
 
-function createMatrix(n, m) { //2次元配列を作っているだけ
+function createMatrix(n, m, v) {
     var d = new Array(n);
     for (var i = 0; i < d.length; i++) {
 	d[i] = new Array(m);
 	for (var j = 0; j < d[i].length; j++) {
-	    d[i][j] = 0;
+	    d[i][j] = v;
 	}
     }
     return d;
 }
 
-function createDtwMatrix(n, m) { //2次元配列の初期化
-    var dtw = createMatrix(n, m);
-
-    // init
-    for (var i = 0; i < n; i++) {
-	for (var j = 0; j < m; j++) {
-	    dtw[i][j] = Number.MAX_VALUE;
-	}
-    }
-    
-    dtw[0][0] = 0;
-
-    return dtw;
-}
-
-DTW.distance = function(ts1, ts2, distFunc, window) {
+DTW.distance = function(ts1, ts2, distFunc, w) {
     var n = ts1.length;
     var m = ts2.length;
-    var w = Math.max(window, Math.abs(n-m));
-    var dtw = createDtwMatrix(n, m);
 
-    for (var i = 1; i < n; i++) {
-	for (var j = Math.max(1, i-w); j < Math.min(m, i+w); j++) {
-	    var cost = distFunc(ts1[i-1], ts2[j-1]);
-	    dtw[i][j] = cost + Math.min(dtw[i-1][j], dtw[i][j-1], dtw[i-1][j-1]);
-	}
+    // default window size
+    if (typeof w === 'undefined') {
+	w = Math.max(n, m);
     }
 
-    return dtw[n-1][m-1];
+    w = Math.max(w, Math.abs(n - m));
+    // console.log(w);
+
+    var costMatrix = createMatrix(n+1, m+1, Number.POSITIVE_INFINITY);
+    costMatrix[0][0] = 0;
+
+    for (var i = 1; i <= n; i++) {
+	var begin = Math.max(1, i - w);
+	var end   = Math.min(m, i + w);
+	for (var j = begin; j <= end; j++) {
+	    var cost = distFunc(ts1[i-1], ts2[j-1]);
+	    costMatrix[i][j] = cost + Math.min(costMatrix[i-1][j  ],
+					       costMatrix[i  ][j-1],
+					       costMatrix[i-1][j-1]);
+	}
+    }
+    // console.log(costMatrix);
+
+    return costMatrix[n][m];
 };
 
 module.exports = DTW;
