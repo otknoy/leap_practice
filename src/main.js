@@ -1,4 +1,3 @@
-
 var DTW = require('./dtw.js');
 var $ = require('jquery');
 var Leap = require('leapjs');
@@ -83,7 +82,7 @@ function zClear(data){
 }
 
 function searchTimeSeries(tsQuery) {
-   // スコアの計算
+    // スコアの計算
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
@@ -92,7 +91,10 @@ function searchTimeSeries(tsQuery) {
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
 	var ts_S = changeOfPosition(samples[i].points);
-	var d = DTW.distance(ts_Q, ts_S, distance);
+//	console.log(ts_S);
+	var d = DTW.distance(ts_Q, ts_S, distance, 10);
+
+		    
 	score.push({
 	    name:samples[i].name,
 	    score:d
@@ -103,11 +105,11 @@ function searchTimeSeries(tsQuery) {
 	if(a.score > b.score) return 1;
 	return 0;
     });
-   // スコアでソート
-   // 上位 hits 件を返す
-   //  返したデータにスコアをつけとくといいかも
+    // スコアでソート
+    // 上位 hits 件を返す
+    //  返したデータにスコアをつけとくといいかも
     //  よくわからないなら後回しで
-   
+    
     console.log(score);
     return score;
 };
@@ -125,13 +127,13 @@ function recordFinger(){
     if (isRecording) {
 	console.log('end');
 
-//	zClear(points);
-//	zClear(sample);
-//	var ts1 = changeOfPosition(points);
-//	var ts2 = changeOfPosition(sample);
+	//	zClear(points);
+	//	zClear(sample);
+	//	var ts1 = changeOfPosition(points);
+	//	var ts2 = changeOfPosition(sample);
 	//	var d = DTW.distance(ts1, ts2, distance);
 	searchTimeSeries(points);
-//	console.log('d:'+d);
+	//	console.log('d:'+d);
 	//console.log(score);
 	// compute cost
 	
