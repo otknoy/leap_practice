@@ -3,7 +3,7 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    Background: #808080;
+    Background: #a9a9a9;
     position: relative;
 }
 
@@ -26,6 +26,7 @@ html,body {
     float: right;
     Background: #ff6347;
     color: white;
+    text-align: center;
 }
 
 
@@ -46,18 +47,45 @@ html,body {
     height: 100%;
     width: 45%;
     Background: #1abc9c;
+    box-shadow: 0 5px 0 #2e8b57;
+    border-radius: 4px;
+    text-align: center;
     float: left;
     color: white;
+}
+
+#rec-button:hover {
+    background-color: #2e8b57;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
+#rec-button:active {
+    background-color: #2e8b57;
+    box-shadow: 0 0px 0 ;
+    color: gray;
 }
 
 #search-button {
     height: 100%;
     width: 45%;
     Background: #4169e1;
+    box-shadow: 0 5px 0 #00008b;
+    border-radius: 4px;
+    text-align: center;
     float: right;
     color: white;
 }
 
+#search-button:hover {
+    background-color: #00008b;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
+#search-button:active {
+    background-color: #00008b;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
 
 #use-img {
     height: 43%;
@@ -67,5 +95,6 @@ html,body {
     margin-top:5%;
     margin-bottom:0;
     color: white;
+    text-align: center;
 }
 
