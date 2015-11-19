@@ -3,5 +3,32 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    background: gray;
+    Background: gray;
 }
+
+#status {
+    height: 5%;
+    width: 90%;
+    Background: red;
+}
+
+#input {
+    height: 70%;
+    width: 90%;
+    Background: yellow;
+}
+
+#sketch {
+    Background: white;
+}
+
+#rec-button {
+    Background: red;
+}
+
+#output {
+    height: 25%;
+    width: 90%;
+    Background: pink;
+}
+
