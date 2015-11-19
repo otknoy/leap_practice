@@ -4,33 +4,65 @@ html,body {
     margin: 0;
     padding: 0;
     Background: gray;
-}
-
-#status {
-    height: 5%;
-    width: 90%;
-    Background: red;
+    position: relative;    
 }
 
 #input {
-    height: 70%;
-    width: 90%;
-    Background: yellow;
+    height: 90%;
+    width: 95%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    /* margin-right: auto; */
+    /* margin-left : auto; */
 }
 
-#sketch {
-    Background: white;
-}
-
-#rec-button {
-    width: 45%;
-    height: 15%;
+#status {
+    height: 10%;
+    width: 50%;
+    float: right;
     Background: red;
 }
 
-#output {
-    height: 25%;
-    width: 90%;
+
+#sketch {
+    Background: white;
+    float: left;
+}
+
+.button {
+    height: 15%;
+    width: 50%;
+    float: right;
+    margin-top:5%;
+
+}
+
+#rec-button {
+    height: 100%;
+    width: 45%;
+    Background: green;
+    float: left;
+}
+
+#search-button {
+    height: 100%;
+    width: 45%;
+    Background: blue;
+    float: right;
+}
+
+
+#use-img {
+    height: 43%;
+    width: 50%;
     Background: pink;
+    float: right;
+    
+    margin-top:5%;
+    margin-bottom:0;
 }
 
