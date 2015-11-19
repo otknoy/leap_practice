@@ -23,6 +23,8 @@ html,body {
 }
 
 #rec-button {
+    width: 45%;
+    height: 15%;
     Background: red;
 }
 
