@@ -3,8 +3,8 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    Background: gray;
-    position: relative;    
+    Background: #808080;
+    position: relative;
 }
 
 #input {
@@ -24,7 +24,8 @@ html,body {
     height: 10%;
     width: 50%;
     float: right;
-    Background: red;
+    Background: #ff6347;
+    color: white;
 }
 
 
@@ -44,25 +45,27 @@ html,body {
 #rec-button {
     height: 100%;
     width: 45%;
-    Background: green;
+    Background: #1abc9c;
     float: left;
+    color: white;
 }
 
 #search-button {
     height: 100%;
     width: 45%;
-    Background: blue;
+    Background: #4169e1;
     float: right;
+    color: white;
 }
 
 
 #use-img {
     height: 43%;
     width: 50%;
-    Background: pink;
+    Background: #ffb6c1;
     float: right;
-    
     margin-top:5%;
     margin-bottom:0;
+    color: white;
 }
 
