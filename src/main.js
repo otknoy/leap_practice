@@ -68,6 +68,8 @@ function searchTimeSeries(tsQuery) {
     var n = samples.length;
     var score = [];
     zClear(tsQuery);
+    var maxts_Q = Math.max.apply(null,tsQuery);
+    console.log(maxts_Q);
     var ts_Q = changeOfPosition(tsQuery);
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
