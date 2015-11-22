@@ -5,12 +5,7 @@ var Sketch = require('./sketch.js');
 var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
-//var fs = require('fs');
 var samples = require('./samples.json');
-
-//var samples = JSON.parse(fs.readFileSync('./samples.json', 'utf8'));
-
-
 
 var points = [];
 var isRecording = false;
@@ -47,20 +42,6 @@ function getFingertip(finger){
     return point;
 }
 
-// function transformXYZ(points) {
-//     var X = [];
-//     var Y = [];
-//     var Z = [];
-
-//     for (var i in points) {
-// 	var p = points[i];
-// 	X.push(p.x);
-// 	Y.push(p.y);
-// 	Z.push(p.z);
-//     }
-
-//     return {X: X, Y: Y, Z: Z};
-// }
 function changeOfPosition(data) {
     var n = data.length - 1;
     var d = [];
@@ -91,10 +72,7 @@ function searchTimeSeries(tsQuery) {
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
 	var ts_S = changeOfPosition(samples[i].points);
-//	console.log(ts_S);
 	var d = DTW.distance(ts_Q, ts_S, distance, 10);
-
-		    
 	score.push({
 	    name:samples[i].name,
 	    score:d
@@ -104,12 +82,7 @@ function searchTimeSeries(tsQuery) {
 	if(a.score < b.score) return -1;
 	if(a.score > b.score) return 1;
 	return 0;
-    });
-    // スコアでソート
-    // 上位 hits 件を返す
-    //  返したデータにスコアをつけとくといいかも
-    //  よくわからないなら後回しで
-    
+    });    
     console.log(score);
     return score;
 };
@@ -122,21 +95,11 @@ function distance(p1, p2) {
     return d;
 };
 
-
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-
-	//	zClear(points);
-	//	zClear(sample);
-	//	var ts1 = changeOfPosition(points);
-	//	var ts2 = changeOfPosition(sample);
-	//	var d = DTW.distance(ts1, ts2, distance);
 	searchTimeSeries(points);
-	//	console.log('d:'+d);
-	//console.log(score);
-	// compute cost
-	
+
     } else {
 	console.log('begin');
     }
@@ -144,8 +107,4 @@ function recordFinger(){
     isRecording = !isRecording;
 }    
 
-
 $('#rec-button').click(recordFinger);
-
-//leap motion で取った座標データを dtw に食わせる前に z の値を全部 0 にしたらいいんちゃうの？
-//時系列データを一つ渡したら、z の値を全部 0 にする関数を書くねや！
