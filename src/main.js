@@ -62,16 +62,28 @@ function zClear(data){
     }    
 }
 
+function minSubtraction(data, minX, minY){
+    var n = data.length;
+    for (var i = 0; i < n; i++) {
+	data[i].x = data[i].x - minX;
+	data[i].y = data[i].y - minY;
+    }
+    console.log("hey");
+}
+
 function searchTimeSeries(tsQuery) {
     // スコアの計算
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
     zClear(tsQuery);
-    var maxX_ts_Q = Math.max.apply(null,tsQuery.map(function(o){return o.x;}));
-    console.log(maxX_ts_Q);
+    console.log(tsQuery);
     var minX_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.x;}));
+    var minY_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.y;}));
     console.log(minX_ts_Q);
+    console.log(minY_ts_Q);
+    minSubtraction(tsQuery, minX_ts_Q, minY_ts_Q);
+    console.log(tsQuery);
     var ts_Q = changeOfPosition(tsQuery);
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
