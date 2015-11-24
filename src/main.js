@@ -62,13 +62,21 @@ function zClear(data){
     }    
 }
 
-function minSubtraction(data, minX, minY){
-    var n = data.length;
-    for (var i = 0; i < n; i++) {
-	data[i].x = data[i].x - minX;
-	data[i].y = data[i].y - minY;
+function normalize(array) {
+    var max = Math.max.apply(null, array);
+    var min = Math.min.apply(null, array);
+
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = (array[i] - min) / (max - min);
+	narray.push(nv);
     }
-    console.log("hey");
+    return narray;
+};
+
+
+function extractAxis(points, axis) {
+    return points.map(function(e) { return e[axis]; });
 }
 
 function searchTimeSeries(tsQuery) {
@@ -76,15 +84,16 @@ function searchTimeSeries(tsQuery) {
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
+    console.log(tsQuery);
     zClear(tsQuery);
     console.log(tsQuery);
-    var minX_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.x;}));
-    var minY_ts_Q = Math.min.apply(null,tsQuery.map(function(o){return o.y;}));
-    console.log(minX_ts_Q);
-    console.log(minY_ts_Q);
-    minSubtraction(tsQuery, minX_ts_Q, minY_ts_Q);
-    console.log(tsQuery);
     var ts_Q = changeOfPosition(tsQuery);
+    var ts_QX = extractAxis(ts_Q, 'x');
+    var ts_QY = extractAxis(ts_Q, 'y');
+
+    normalize(ts_QX);
+    normalize(ts_QY);
+    
     for (var i = 0; i < n; i++){
 	zClear(samples[i].points);
 	var ts_S = changeOfPosition(samples[i].points);
