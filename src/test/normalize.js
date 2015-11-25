@@ -30,7 +30,33 @@ console.log(points);
 var pointsX = extractAxis(points, 'x');
 console.log(pointsX);
 
-var normalized = normalize(pointsX);
-console.log(normalized);
+var normalizedX = normalize(pointsX);
+console.log(normalizedX);
+
+var pointsY = extractAxis(points, 'y');
+console.log(pointsY);
+
+var normalizedY = normalize(pointsY);
+console.log(normalizedY);
+
+var pointsZ = extractAxis(points, 'z');
+console.log(pointsZ);
+
+var normalizedZ = normalize(pointsZ);
+console.log(normalizedZ);
 
 
+function setNormalizeArray(arrayX,arrayY,arrayZ){
+    var arrayN =[];
+    for (var i = 0; i < arrayX.length; i++) {
+	arrayN.push({
+	    x: arrayX[i],
+	    y: arrayY[i],
+	    z: arrayZ[i]
+	});
+    }
+    return arrayN;
+}
+
+var ts_Q =setNormalizeArray(normalizedX,normalizedY,normalizedZ);
+console.log(ts_Q);
