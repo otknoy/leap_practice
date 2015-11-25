@@ -74,6 +74,17 @@ function normalize(array) {
     return narray;
 };
 
+function setNormalizeArray(arrayX,arrayY,arrayZ){
+    var arrayN =[];
+    for (var i = 0; i < arrayX.length; i++) {
+	arrayN.push({
+	    x: arrayX[i],
+	    y: arrayY[i],
+	    z: arrayZ[i]
+	});
+    }
+    return arrayN;
+}
 
 function extractAxis(points, axis) {
     return points.map(function(e) { return e[axis]; });
