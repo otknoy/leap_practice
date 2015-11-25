@@ -5,12 +5,7 @@ var Sketch = require('./sketch.js');
 var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
-//var fs = require('fs');
 var samples = require('./samples.json');
-
-//var samples = JSON.parse(fs.readFileSync('./samples.json', 'utf8'));
-
-
 
 var points = [];
 var isRecording = false;
@@ -47,20 +42,6 @@ function getFingertip(finger){
     return point;
 }
 
-// function transformXYZ(points) {
-//     var X = [];
-//     var Y = [];
-//     var Z = [];
-
-//     for (var i in points) {
-// 	var p = points[i];
-// 	X.push(p.x);
-// 	Y.push(p.y);
-// 	Z.push(p.z);
-//     }
-
-//     return {X: X, Y: Y, Z: Z};
-// }
 function changeOfPosition(data) {
     var n = data.length - 1;
     var d = [];
@@ -74,11 +55,41 @@ function changeOfPosition(data) {
     return d;
 }
 
-function zClear(data){
+function clear(data){
     var n = data.length;
+    var d = [];
     for (var i = 0; i < n; i++) {
-	data[i].z = 0;
-    }    
+	d.push(0);
+    }
+    return d;
+}
+
+function normalize(array) {
+    var max = Math.max.apply(null, array);
+    var min = Math.min.apply(null, array);
+
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = (array[i] - min) / (max - min);
+	narray.push(nv);
+    }
+    return narray;
+};
+
+function setNormalizeArray(arrayX,arrayY,arrayZ){
+    var arrayN =[];
+    for (var i = 0; i < arrayX.length; i++) {
+	arrayN.push({
+	    x: arrayX[i],
+	    y: arrayY[i],
+	    z: arrayZ[i]
+	});
+    }
+    return arrayN;
+}
+
+function extractAxis(points, axis) {
+    return points.map(function(e) { return e[axis]; });
 }
 
 function searchTimeSeries(tsQuery) {
@@ -86,15 +97,35 @@ function searchTimeSeries(tsQuery) {
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
-    zClear(tsQuery);
-    var ts_Q = changeOfPosition(tsQuery);
-    for (var i = 0; i < n; i++){
-	zClear(samples[i].points);
-	var ts_S = changeOfPosition(samples[i].points);
-//	console.log(ts_S);
-	var d = DTW.distance(ts_Q, ts_S, distance, 10);
 
-		    
+    var ts_dQ = changeOfPosition(tsQuery);
+    var ts_QX = extractAxis(ts_dQ, 'x');
+    var ts_QY = extractAxis(ts_dQ, 'y');
+    var ts_QZ = extractAxis(ts_dQ, 'z');
+    var ts_QZc = clear(ts_QZ);
+
+    var normalizedQX = normalize(ts_QX);
+    var normalizedQY = normalize(ts_QY);
+    //var normalizedQZ = normalize(ts_QZc);
+    //console.log(normalizedQZ);
+    var ts_Q = setNormalizeArray(normalizedQX, normalizedQY, ts_QZc);
+
+
+    for (var i = 0; i < n; i++){
+
+	var ts_dS = changeOfPosition(samples[i].points);
+	var ts_SX = extractAxis(ts_dS, 'x');
+	var ts_SY = extractAxis(ts_dS, 'y');
+	var ts_SZ = extractAxis(ts_dS, 'z');
+	var ts_SZc = clear(ts_SZ);
+	
+	var normalizedSX = normalize(ts_SX);
+	var normalizedSY = normalize(ts_SY);
+	//var normalizedSZ = normalize(ts_SZc);
+	//console.log(normalizedSZ);
+	var ts_S = setNormalizeArray(normalizedSX, normalizedSY, ts_SZc);
+	
+	var d = DTW.distance(ts_Q, ts_S, distance, 10);
 	score.push({
 	    name:samples[i].name,
 	    score:d
@@ -104,12 +135,7 @@ function searchTimeSeries(tsQuery) {
 	if(a.score < b.score) return -1;
 	if(a.score > b.score) return 1;
 	return 0;
-    });
-    // スコアでソート
-    // 上位 hits 件を返す
-    //  返したデータにスコアをつけとくといいかも
-    //  よくわからないなら後回しで
-    
+    });    
     console.log(score);
     return score;
 };
@@ -122,21 +148,11 @@ function distance(p1, p2) {
     return d;
 };
 
-
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-
-	//	zClear(points);
-	//	zClear(sample);
-	//	var ts1 = changeOfPosition(points);
-	//	var ts2 = changeOfPosition(sample);
-	//	var d = DTW.distance(ts1, ts2, distance);
 	searchTimeSeries(points);
-	//	console.log('d:'+d);
-	//console.log(score);
-	// compute cost
-	
+
     } else {
 	console.log('begin');
     }
@@ -144,8 +160,4 @@ function recordFinger(){
     isRecording = !isRecording;
 }    
 
-
 $('#rec-button').click(recordFinger);
-
-//leap motion で取った座標データを dtw に食わせる前に z の値を全部 0 にしたらいいんちゃうの？
-//時系列データを一つ渡したら、z の値を全部 0 にする関数を書くねや！

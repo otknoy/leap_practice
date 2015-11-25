@@ -2,19 +2,23 @@
   <html>
     <head>
       <meta charset="UTF-8">
+      <link rel="stylesheet" type"text/css" href="./index.css">
       <script src="./lib/leap-0.6.4.min.js"></script>
       <script src="./lib/processing.min.js"></script>
+      <link rel="stylesheet" type"text/css" href="./index.css">
     </head>
     <body>
-      <p>
-	<canvas id="sketch" width="600" height="600"></canvas>
-      </p>
-      <div id="output"></div>
-      <p>
-	<input type="button" value="REC" id ="rec-button" >
-      </p>
+      <div id="input">
+	<div id="status">STATUS</div>
+	<canvas id="sketch" width="500" height="500"></canvas>
+	<div class ="button">
+	  <input type="button" value="REC" id ="rec-button" >
+	  <div id ="search-button">SEARCH</div>
+	</div>
+	<div id="use-img">USE img</div>
+      </div>
       <script src="js/bundle.js"></script>
 
       
-   </body>
+    </body>
   </html>

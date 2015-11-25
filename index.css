@@ -1,0 +1,105 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    Background: #a9a9a9;
+    position: relative;
+}
+
+#input {
+    height: 90%;
+    width: 95%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+
+/* status setting */
+
+#status {
+    height: 10%;
+    width: 50%;
+    float: right;
+    Background: #ff6347;
+    color: white;
+    text-align: center;
+    margin-top: 2%;
+}
+
+
+#sketch {
+    Background: white;
+    float: left;
+    margin-top: 2%;
+}
+
+
+/* button setting */
+
+.button {
+    height: 15%;
+    width: 50%;
+    float: right;
+    margin-top:5%;
+
+}
+
+#rec-button {
+    height: 100%;
+    width: 45%;
+    Background: #3cb371;
+    box-shadow: 0 5px 0 #2e8b57;
+    border-radius: 5px;
+    text-align: center;
+    float: left;
+    color: white;
+}
+
+#rec-button:hover {
+    background-color: #2e8b57;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
+#rec-button:active {
+    background-color: #2e8b57;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
+
+#search-button {
+    height: 100%;
+    width: 45%;
+    Background: #4169e1;
+    box-shadow: 0 5px 0 #00008b;
+    border-radius: 5px;
+    text-align: center;
+    float: right;
+    color: white;
+}
+
+#search-button:hover {
+    background-color: #00008b;
+    box-shadow: 0 0px 0 ;
+    color: gray;
+}
+#search-button:active {
+    background-color: #00008b;
+    box-shadow: 0 0px 0 ;
+
+}
+
+#use-img {
+    height: 43%;
+    width: 50%;
+    Background: #ffb6c1;
+    float: right;
+    margin-top:5%;
+    margin-bottom:0;
+    color: white;
+    text-align: center;
+}
