@@ -55,11 +55,13 @@ function changeOfPosition(data) {
     return d;
 }
 
-function zClear(data){
+function clear(data){
     var n = data.length;
+    var d = [];
     for (var i = 0; i < n; i++) {
-	data[i].z = 0;
-    }    
+	d.push(0);
+    }
+    return d;
 }
 
 function normalize(array) {
@@ -95,19 +97,34 @@ function searchTimeSeries(tsQuery) {
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
-    console.log(tsQuery);
-    zClear(tsQuery);
-    console.log(tsQuery);
-    var ts_Q = changeOfPosition(tsQuery);
-    var ts_QX = extractAxis(ts_Q, 'x');
-    var ts_QY = extractAxis(ts_Q, 'y');
 
-    normalize(ts_QX);
-    normalize(ts_QY);
-    
+    var ts_dQ = changeOfPosition(tsQuery);
+    var ts_QX = extractAxis(ts_dQ, 'x');
+    var ts_QY = extractAxis(ts_dQ, 'y');
+    var ts_QZ = extractAxis(ts_dQ, 'z');
+    var ts_QZc = clear(ts_QZ);
+
+    var normalizedQX = normalize(ts_QX);
+    var normalizedQY = normalize(ts_QY);
+    //var normalizedQZ = normalize(ts_QZc);
+    //console.log(normalizedQZ);
+    var ts_Q = setNormalizeArray(normalizedQX, normalizedQY, ts_QZc);
+
+
     for (var i = 0; i < n; i++){
-	zClear(samples[i].points);
-	var ts_S = changeOfPosition(samples[i].points);
+
+	var ts_dS = changeOfPosition(samples[i].points);
+	var ts_SX = extractAxis(ts_dS, 'x');
+	var ts_SY = extractAxis(ts_dS, 'y');
+	var ts_SZ = extractAxis(ts_dS, 'z');
+	var ts_SZc = clear(ts_SZ);
+	
+	var normalizedSX = normalize(ts_SX);
+	var normalizedSY = normalize(ts_SY);
+	//var normalizedSZ = normalize(ts_SZc);
+	//console.log(normalizedSZ);
+	var ts_S = setNormalizeArray(normalizedSX, normalizedSY, ts_SZc);
+	
 	var d = DTW.distance(ts_Q, ts_S, distance, 10);
 	score.push({
 	    name:samples[i].name,
