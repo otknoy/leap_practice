@@ -44,19 +44,3 @@ console.log(pointsZ);
 
 var normalizedZ = normalize(pointsZ);
 console.log(normalizedZ);
-
-
-function setNormalizeArray(arrayX,arrayY,arrayZ){
-    var arrayN =[];
-    for (var i = 0; i < arrayX.length; i++) {
-	arrayN.push({
-	    x: arrayX[i],
-	    y: arrayY[i],
-	    z: arrayZ[i]
-	});
-    }
-    return arrayN;
-}
-
-var ts_Q =setNormalizeArray(normalizedX,normalizedY,normalizedZ);
-console.log(ts_Q);
