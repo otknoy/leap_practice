@@ -32,11 +32,11 @@ function normalize(arrayX, arrayY) {
     
     var nyarray =[];
     for (var j = 0; j < arrayY.length; j++) {
-	var nvy = (arrayY[i] - minY) / max;
+	var nvy = (arrayY[j] - minY) / max;
 	nxarray.push(nvy);
     }    
     
-    return nxarray, nyarray;
+    return {x:nxarray, y:nyarray};
 };
 
 function extractAxis(points, axis) {
@@ -59,7 +59,8 @@ console.log(pointsX);
 var pointsY = extractAxis(points, 'y');
 console.log(pointsY);
 var normalized = normalize(pointsX, pointsY);
-console.log(normalized);
+console.log(normalized.x);
+console.log(normalized.y);
 
 
 
@@ -95,5 +96,5 @@ function setNormalizeArray(arrayX,arrayY,arrayZ){
     return arrayN;
 }
 
-var ts_Q =setNormalizeArray(normalized,zclear);
+var ts_Q =setNormalizeArray(normalized.x,normalized.y,zclear);
 console.log(ts_Q);
