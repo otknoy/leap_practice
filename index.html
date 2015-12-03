@@ -8,14 +8,16 @@
       <link rel="stylesheet" type"text/css" href="./index.css">
     </head>
     <body>
-      <div id="input">
-	<div id="status">STATUS</div>
-	<canvas id="sketch" width="500" height="500"></canvas>
-	<div class ="button">
-	  <input type="button" value="REC" id ="rec-button" >
-	  <div id ="search-button">SEARCH</div>
+      <div id="show">
+	<div id="input">
+	  <canvas id="sketch" width="550" height="550"></canvas>
+	  <div class ="sketch_under">
+	    <div id ="logo"></div>
+	    <input type="button" value="入力開始" id ="rec-button" >
+	    <input type="button" value="入力終了" id ="search-button">
+	  </div>
 	</div>
-	<div id="use-img">USE img</div>
+	<div id="output"></div>
       </div>
       <script src="js/bundle.js"></script>
 

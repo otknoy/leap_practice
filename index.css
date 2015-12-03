@@ -7,7 +7,7 @@ html,body {
     position: relative;
 }
 
-#input {
+#show {
     height: 90%;
     width: 95%;
     position: absolute;
@@ -18,46 +18,59 @@ html,body {
     margin: auto;
 }
 
-
-/* status setting */
-
-#status {
-    height: 10%;
+#input {
+    height: 100%;
     width: 50%;
-    float: right;
-    Background: #ff6347;
-    color: white;
-    text-align: center;
-    margin-top: 2%;
+    float: left;
+    position: relative;
+}
+
+#output {
+    height: 100%;
+    width: 50%;
+    float: left;
+    background: yellow;
+    overflow: scroll;
 }
 
 
 #sketch {
     Background: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 20%;
+    left: 0;
+    margin: auto;
+}
+
+
+
+.sketch_under {
+    height: 10%;
+    width: 90%;
+    position: absolute;
+    bottom:0;
+    left:5%;
+    right:0;
+}
+
+#logo {
+    height: 100%;
+    width: 30%;
     float: left;
-    margin-top: 2%;
-}
-
-
-/* button setting */
-
-.button {
-    height: 15%;
-    width: 50%;
-    float: right;
-    margin-top:5%;
-
-}
+ }
 
 #rec-button {
     height: 100%;
-    width: 45%;
+    width: 30%;
     Background: #3cb371;
     box-shadow: 0 5px 0 #2e8b57;
     border-radius: 5px;
     text-align: center;
     float: left;
     color: white;
+    border-style: none;
 }
 
 #rec-button:hover {
@@ -73,13 +86,14 @@ html,body {
 
 #search-button {
     height: 100%;
-    width: 45%;
+    width: 30%;
     Background: #4169e1;
     box-shadow: 0 5px 0 #00008b;
     border-radius: 5px;
     text-align: center;
     float: right;
     color: white;
+    border-style: none;
 }
 
 #search-button:hover {
@@ -90,16 +104,5 @@ html,body {
 #search-button:active {
     background-color: #00008b;
     box-shadow: 0 0px 0 ;
-
-}
-
-#use-img {
-    height: 43%;
-    width: 50%;
-    Background: #ffb6c1;
-    float: right;
-    margin-top:5%;
-    margin-bottom:0;
-    color: white;
-    text-align: center;
+    color: gray;
 }
