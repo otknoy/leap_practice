@@ -173,6 +173,6 @@ function recordFinger(){
 
 $('#rec-button').click(recordFinger);
 $('#search-button').click(function(){
-    isRecording = !isRecording;
+    isRecording = false;
     searchTimeSeries(points);
 });
