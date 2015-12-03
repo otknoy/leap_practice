@@ -62,10 +62,17 @@ function experiment(method, query, data) {
 }
 
 
+
+// search target data set
 var data = require('./samples.json');
+
+// sample query
 var query = data[0];
 
+// baseline method
 var a_result = experiment(methodA, query, data);
+
+// method using normalization
 var b_result = experiment(methodB, query, data);
 
 console.log(a_result.map(function(d) { return d.data.name; }));
