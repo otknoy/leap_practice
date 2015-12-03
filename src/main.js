@@ -64,17 +64,17 @@ function clear(data){
     return d;
 }
 
-function normalize(array) {
-    var max = Math.max.apply(null, array);
-    var min = Math.min.apply(null, array);
+// function normalize(array) {
+//     var max = Math.max.apply(null, array);
+//     var min = Math.min.apply(null, array);
 
-    var narray = [];
-    for (var i = 0; i < array.length; i++) {
-	var nv = (array[i] - min) / (max - min);
-	narray.push(nv);
-    }
-    return narray;
-};
+//     var narray = [];
+//     for (var i = 0; i < array.length; i++) {
+// 	var nv = (array[i] - min) / (max - min);
+// 	narray.push(nv);
+//     }
+//     return narray;
+// };
 
 function setNormalizeArray(arrayX,arrayY,arrayZ){
     var arrayN =[];
@@ -88,6 +88,33 @@ function setNormalizeArray(arrayX,arrayY,arrayZ){
     return arrayN;
 }
 
+function normalize(value, min, max) {
+    return (value - min) / (max - min);
+};
+
+// points を min から max で正規化
+function normalizePoints(points) {
+    var d = points.map(function(d) { return [d.x, d.y, d.z]; });
+    var ary = Array.prototype.concat.apply([], d);
+    var min = Math.min.apply(null, ary);
+    var max = Math.max.apply(null, ary);
+
+    var npoints = [];
+    for (var i = 0; i < points.length; i++) {
+	var p = points[i];
+	var np = {
+	    x: normalize(p.x, min, max),
+	    y: normalize(p.y, min, max),
+	    z: normalize(p.z, min, max)
+	};
+
+	npoints.push(np);
+    }
+
+    return npoints;
+}
+
+
 function extractAxis(points, axis) {
     return points.map(function(e) { return e[axis]; });
 }
@@ -98,34 +125,28 @@ function searchTimeSeries(tsQuery) {
     var n = samples.length;
     var score = [];
 
-    var ts_dQ = changeOfPosition(tsQuery);
-    var ts_QX = extractAxis(ts_dQ, 'x');
-    var ts_QY = extractAxis(ts_dQ, 'y');
-    var ts_QZ = extractAxis(ts_dQ, 'z');
+    var ts_Qd = changeOfPosition(tsQuery);
+    var ts_Qn = normalizePoints(ts_Qd);
+    var ts_QX = extractAxis(ts_Qn, 'x');
+    var ts_QY = extractAxis(ts_Qn, 'y');
+    var ts_QZ = extractAxis(ts_Qn, 'z');
     var ts_QZc = clear(ts_QZ);
 
-    var normalizedQX = normalize(ts_QX);
-    var normalizedQY = normalize(ts_QY);
-    //var normalizedQZ = normalize(ts_QZc);
-    //console.log(normalizedQZ);
-    var ts_Q = setNormalizeArray(normalizedQX, normalizedQY, ts_QZc);
-
+    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
+    console.log(ts_Q);
 
     for (var i = 0; i < n; i++){
 
-	var ts_dS = changeOfPosition(samples[i].points);
-	var ts_SX = extractAxis(ts_dS, 'x');
-	var ts_SY = extractAxis(ts_dS, 'y');
-	var ts_SZ = extractAxis(ts_dS, 'z');
+	var ts_Sd = changeOfPosition(samples[i].points);
+	var ts_Sn = normalizePoints(ts_Sd);
+	var ts_SX = extractAxis(ts_Sn, 'x');
+	var ts_SY = extractAxis(ts_Sn, 'y');
+	var ts_SZ = extractAxis(ts_Sn, 'z');
 	var ts_SZc = clear(ts_SZ);
 	
-	var normalizedSX = normalize(ts_SX);
-	var normalizedSY = normalize(ts_SY);
-	//var normalizedSZ = normalize(ts_SZc);
-	//console.log(normalizedSZ);
-	var ts_S = setNormalizeArray(normalizedSX, normalizedSY, ts_SZc);
+	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
 	
-	var d = DTW.distance(ts_Q, ts_S, distance, 10);
+	var d = DTW.distance(ts_Q, ts_S, distance, 30);
 	score.push({
 	    name:samples[i].name,
 	    score:d
