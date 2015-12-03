@@ -9,6 +9,7 @@ var samples = require('./samples.json');
 
 var points = [];
 var isRecording = false;
+var isSearching = false;
 
 Leap.loop({enableGestures: true}, function(frame){
     if(frame.hands.length <= 0){
@@ -64,17 +65,7 @@ function clear(data){
     return d;
 }
 
-// function normalize(array) {
-//     var max = Math.max.apply(null, array);
-//     var min = Math.min.apply(null, array);
 
-//     var narray = [];
-//     for (var i = 0; i < array.length; i++) {
-// 	var nv = (array[i] - min) / (max - min);
-// 	narray.push(nv);
-//     }
-//     return narray;
-// };
 
 function setNormalizeArray(arrayX,arrayY,arrayZ){
     var arrayN =[];
@@ -172,13 +163,16 @@ function distance(p1, p2) {
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-	searchTimeSeries(points);
+//	searchTimeSeries(points);
 
     } else {
 	console.log('begin');
     }
-
     isRecording = !isRecording;
 }    
 
 $('#rec-button').click(recordFinger);
+$('#search-button').click(function(){
+    isRecording = !isRecording;
+    searchTimeSeries(points);
+});
