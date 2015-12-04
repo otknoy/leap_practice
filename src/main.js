@@ -173,6 +173,7 @@ function recordFinger(){
 
 $('#rec-button').click(recordFinger);
 $('#search-button').click(function(){
-    isRecording = false;
-    searchTimeSeries(points);
+    isRecording = false,
+    searchTimeSeries(points),
+    $('#output').html('検索結果');
 });
