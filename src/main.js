@@ -177,10 +177,12 @@ $('#search-button').click(function(){
     isRecording = false,
     result =searchTimeSeries(points),
     console.log(result);
-    //$('#output').html(result),
-    $(function(){
-	$.each(result, function(key, value){
-            $('#output').append(key + ':' + value).append('<br />');
-	});
-    });
+
+    $.each(result, function(index, item){
+	$('#output').append(item.name).append('<br />');
+	$('#output').append(item.score).append('<br />').append('<br />');
+   console.log(item.name);
+   console.log(item.score);
+});
+
 });
