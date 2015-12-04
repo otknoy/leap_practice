@@ -167,6 +167,7 @@ function recordFinger(){
 
     } else {
 	console.log('begin');
+	$("#output").empty();
     }
     isRecording = !isRecording;
 }
@@ -177,13 +178,15 @@ function searchData(){
 	console.log('search start');
 	result =searchTimeSeries(points);
 	console.log(result);
+	// $("output").change(function(){
 	$.each(result, function(index, item){
 	    //console.log(item.name);
 	    //console.log(item.score);
 	    $('#output').append(item.name).append('<br />');
 	    $('#output').append(item.score).append('<br />').append('<br />');
 	});
-	console.log('search end');
+	    console.log('search end');
+	// });
     }else{
 	console.log("nothing");
     }
