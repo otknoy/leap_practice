@@ -9,7 +9,6 @@ var samples = require('./samples.json');
 
 var points = [];
 var isRecording = false;
-var isSearching = false;
 var result = [];
 
 Leap.loop({enableGestures: true}, function(frame){
@@ -170,19 +169,25 @@ function recordFinger(){
 	console.log('begin');
     }
     isRecording = !isRecording;
-}    
+}
+
+function searchData(){
+    if(isRecording){
+	isRecording = false;
+	console.log('search start');
+	result =searchTimeSeries(points);
+	console.log(result);
+	$.each(result, function(index, item){
+	    //console.log(item.name);
+	    //console.log(item.score);
+	    $('#output').append(item.name).append('<br />');
+	    $('#output').append(item.score).append('<br />').append('<br />');
+	});
+	console.log('search end');
+    }else{
+	console.log("nothing");
+    }
+}
 
 $('#rec-button').click(recordFinger);
-$('#search-button').click(function(){
-    isRecording = false,
-    result =searchTimeSeries(points),
-    console.log(result);
-
-    $.each(result, function(index, item){
-	$('#output').append(item.name).append('<br />');
-	$('#output').append(item.score).append('<br />').append('<br />');
-   console.log(item.name);
-   console.log(item.score);
-});
-
-});
+$('#search-button').click(searchData);
