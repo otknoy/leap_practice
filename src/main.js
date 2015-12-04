@@ -10,6 +10,7 @@ var samples = require('./samples.json');
 var points = [];
 var isRecording = false;
 var isSearching = false;
+var result = [];
 
 Leap.loop({enableGestures: true}, function(frame){
     if(frame.hands.length <= 0){
@@ -174,6 +175,12 @@ function recordFinger(){
 $('#rec-button').click(recordFinger);
 $('#search-button').click(function(){
     isRecording = false,
-    searchTimeSeries(points),
-    $('#output').html('検索結果');
+    result =searchTimeSeries(points),
+    console.log(result);
+    //$('#output').html(result),
+    $(function(){
+	$.each(result, function(key, value){
+            $('#output').append(key + ':' + value).append('<br />');
+	});
+    });
 });
