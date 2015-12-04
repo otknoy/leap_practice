@@ -29,8 +29,9 @@ html,body {
     height: 100%;
     width: 50%;
     float: left;
-    background: yellow;
+    background: #ffa07a;
     overflow: scroll;
+    color: white;
 }
 
 

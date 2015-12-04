@@ -6,7 +6,7 @@ var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
 var samples = require('./samples.json');
-
+//var img = require('./img');
 var points = [];
 var isRecording = false;
 var result = [];
