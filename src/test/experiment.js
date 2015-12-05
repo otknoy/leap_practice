@@ -75,5 +75,5 @@ var a_result = experiment(methodA, query, data);
 // method using normalization
 var b_result = experiment(methodB, query, data);
 
-console.log(a_result.map(function(d) { return d.data.name; }));
-console.log(b_result.map(function(d) { return d.data.name; }));
+console.log(a_result.map(function(d) { return "name: " + d.data.name + ", score: " + d.cost; }));
+console.log(b_result.map(function(d) { return "name: " + d.data.name + ", score: " + d.cost; }));
