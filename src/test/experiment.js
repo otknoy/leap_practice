@@ -80,11 +80,14 @@ function sampleData() {
     }
 
     var data = [];
-    data[0] = ax(0, 0, 10);
-    data[1] = ax(1/16, 0, 10);
-    data[2] = ax(1/8, 0, 10);
-    data[3] = ax(1/4, 0, 10);
-    data[4] = ax(1/2, 0, 10);
+    // data[0] = ax(0, 0, 10);
+    // data[1] = ax(1/16, 0, 10);
+    // data[2] = ax(1/8, 0, 10);
+    // data[3] = ax(1/4, 0, 10);
+    // data[4] = ax(1/2, 0, 10);
+    for (var i = 0; i < 10; i++) {
+	data[i] = ax(1/2, 0, (i+1)*10);
+    }
 
     return data;
 }
