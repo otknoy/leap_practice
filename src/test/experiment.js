@@ -66,7 +66,7 @@ function experiment(method, query, data) {
 function sampleData() {
     // y = ax
     function ax(a, begin, end) {
-	var d = {"name": "y="+a+"x",
+	var d = {"name": "y="+a+"x, " + begin + "-" + end,
 		 "points": []};
 	for (var i = begin; i < end; i++) {
 	    var x = i;
