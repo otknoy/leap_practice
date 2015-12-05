@@ -168,6 +168,7 @@ function recordFinger(){
     } else {
 	console.log('begin');
 	$("#output").empty();
+
     }
     isRecording = !isRecording;
 }
@@ -182,12 +183,36 @@ function searchData(){
 	$.each(result, function(index, item){
 	    //console.log(item.name);
 	    //console.log(item.score);
-	    $('#output').append(item.name).append('<br />');
-	    $('#output').append(item.score).append('<br />').append('<br />');
-	     // for instance
+	    // $('#output').append(item.name).append('<br />');
+	    // $('#output').append(item.score).append('<br />').append('<br />');
+
 	    var imgPath = './img/' + item.name + '.png';
-	    var img = '<img src="' + imgPath + '">';
-	    $('#output').append(img).append('<br />');
+	    var img = 'url("' + imgPath + '")';
+
+  
+	    $("#output").append(
+		$("<div/>").css({'height': '30%',
+				     'width': '40%',
+				 'background-image':img,
+				 'background-size': 'contain',
+				 'background-repeat': 'no-repeat',
+				 'float': 'left'}),
+		    $("<div/>").css({'height': '30%',
+				     'width': '60%',
+				     'float': 'left'}).text(item.name+" : "+item.score)
+	    ).trigger('create');
+
+	    
+	    //  $('#output').append(img).append('<br />');
+	    // $('img').each(function() {
+	    // 	var pwidth=($(this).parent().innerWidth());
+	    // 	var phzoom=pwidth/$(this).innerWidth();
+	    // 	if (phzoom<1) {
+	    // 	    $(this).width(pwidth);
+	    // 	    $(this).height($(this).innerHeight()*phzoom);
+	    // 	}
+	    // });
+	    
 	});
 	    console.log('search end');
 	// });
