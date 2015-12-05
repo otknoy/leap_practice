@@ -62,12 +62,41 @@ function experiment(method, query, data) {
 }
 
 
+// sample data
+function sampleData() {
+    // y = ax
+    function ax(a, begin, end) {
+	var d = {"name": "y="+a+"x",
+		 "points": []};
+	for (var i = begin; i < end; i++) {
+	    var x = i;
+	    var y = a * x;
+	    var z = 0;
+	    var p = {"x": x, "y": y, "z": z};
+	    d.points.push(p);
+	}
+
+	return d;
+    }
+
+    var data = [];
+    data[0] = ax(0, 0, 10);
+    data[1] = ax(1/16, 0, 10);
+    data[2] = ax(1/8, 0, 10);
+    data[3] = ax(1/4, 0, 10);
+    data[4] = ax(1/2, 0, 10);
+
+    return data;
+}
+
 
 // search target data set
-var data = require('./samples.json');
+// var data = require('./samples.json');
+var data = sampleData();
 
 // sample query
-var query = data[0];
+var query = data[2];
+console.log('sample query name: ' + query.name + '\n');
 
 // baseline method
 var a_result = experiment(methodA, query, data);
