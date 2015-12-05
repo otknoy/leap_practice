@@ -55,7 +55,7 @@ function experiment(method, query, data) {
     for (var i = 0; i < data.length; i++) {
 	var cost = method(query.points, data[i].points);
 	
-	result.push({cost: cost, data: data[i]});
+	result.push({cost: cost, points: data[i]});
     }
     
     return result.sort(function(a, b) { return a.cost - b.cost; });
@@ -104,5 +104,5 @@ var a_result = experiment(methodA, query, data);
 // method using normalization
 var b_result = experiment(methodB, query, data);
 
-console.log(a_result.map(function(d) { return "name: " + d.data.name + ", score: " + d.cost; }));
-console.log(b_result.map(function(d) { return "name: " + d.data.name + ", score: " + d.cost; }));
+console.log(a_result.map(function(d) { return "name: " + d.points.name + ", score: " + d.cost; }));
+console.log(b_result.map(function(d) { return "name: " + d.points.name + ", score: " + d.cost; }));
