@@ -6,7 +6,7 @@ var showColor = '#87ceeb';
 var drawColor = '#000080';
 var sketch = new Sketch('sketch');
 var samples = require('./samples.json');
-//var img = require('./img');
+
 var points = [];
 var isRecording = false;
 var result = [];
@@ -163,7 +163,6 @@ function distance(p1, p2) {
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-//	searchTimeSeries(points);
 
     } else {
 	console.log('begin');
@@ -180,16 +179,9 @@ function searchData(){
 	result =searchTimeSeries(points);
 	console.log(result);
 	$.each(result, function(index, item){
-	    //console.log(item.name);
-	    //console.log(item.score);
-	    // $('#output').append(item.name).append('<br />');
-	    // $('#output').append(item.score).append('<br />').append('<br />');
-
 
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
-
-
   
 	    $("#output").append(
 		$("<div/>").attr('class', 'view').append(img),
@@ -197,22 +189,14 @@ function searchData(){
 		    append('<p/>').
 		    append(item.name).
 		    append('<br/>').
-		    append(item.score)//.
+		    append(item.score)
 	    ).trigger('create');
 
 	    $('.view').show(img);
-	    // $('img').each(function() {
-	    // 	var pwidth=($(this).parent().innerWidth());
-	    // 	var phzoom=pwidth/$(this).innerWidth();
-	    // 	if (phzoom<1) {
-	    // 	    $(this).width(pwidth);
-	    // 	    $(this).height($(this).innerHeight()*phzoom);
-	    // 	}
-	    // });
 	    
 	});
 	console.log('search end');
-	// });
+
     }else{
 	console.log("nothing");
     }
