@@ -35,19 +35,33 @@ html,body {
     color: white;
 }
 
-/* .img { */
-/*     height: 30%; */
-/*     width: 40%; */
-/*     Background:gray; */
-/*     float: left; */
-/* } */
+.view {
+    height: 30%;
+    width:30%;
+    Background:black;
+    float: left;
+    position: relative;
+}
 
-/* .result { */
-/*     height: 30%; */
-/*     width: 60%; */
-/*     Background:gray; */
-/*     float: left; */
-/* } */
+.view img {
+    max-width: 100%;
+    height:auto;
+     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    
+}
+
+
+.result {
+    height: 30%;
+    width: 60%;
+    Background:gray;
+    float: right;
+}
     
 
 #sketch {

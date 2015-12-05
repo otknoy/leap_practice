@@ -179,31 +179,28 @@ function searchData(){
 	console.log('search start');
 	result =searchTimeSeries(points);
 	console.log(result);
-	// $("output").change(function(){
 	$.each(result, function(index, item){
 	    //console.log(item.name);
 	    //console.log(item.score);
 	    // $('#output').append(item.name).append('<br />');
 	    // $('#output').append(item.score).append('<br />').append('<br />');
 
+
 	    var imgPath = './img/' + item.name + '.png';
-	    var img = 'url("' + imgPath + '")';
+	    var img = '<img src="' + imgPath + '">';
+
 
   
 	    $("#output").append(
-		$("<div/>").css({'height': '30%',
-				     'width': '40%',
-				 'background-image':img,
-				 'background-size': 'contain',
-				 'background-repeat': 'no-repeat',
-				 'float': 'left'}),
-		    $("<div/>").css({'height': '30%',
-				     'width': '60%',
-				     'float': 'left'}).text(item.name+" : "+item.score)
+		$("<div/>").attr('class', 'view').append(img),
+		$("<div/>").attr('class', 'result').
+		    append('<p/>').
+		    append(item.name).
+		    append('<br/>').
+		    append(item.score)//.
 	    ).trigger('create');
 
-	    
-	    //  $('#output').append(img).append('<br />');
+	    $('.view').show(img);
 	    // $('img').each(function() {
 	    // 	var pwidth=($(this).parent().innerWidth());
 	    // 	var phzoom=pwidth/$(this).innerWidth();
@@ -214,7 +211,7 @@ function searchData(){
 	    // });
 	    
 	});
-	    console.log('search end');
+	console.log('search end');
 	// });
     }else{
 	console.log("nothing");
