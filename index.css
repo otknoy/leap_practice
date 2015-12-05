@@ -3,7 +3,7 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    Background: #a9a9a9;
+    Background:#696969;
     position: relative;
 }
 
@@ -29,24 +29,25 @@ html,body {
     height: 100%;
     width: 50%;
     float: left;
-    background: #ffa07a;
+    background: #a9a9a9;
     overflow-y: scroll;
     overflow-x: hidden;
-    color: white;
+    color: #696969;
 }
 
 .view {
     height: 30%;
-    width:30%;
-    Background:black;
+    width: 40%;
+    Background:#add8e6;
     float: left;
     position: relative;
+    margin-bottom: 1%;
 }
 
 .view img {
     max-width: 100%;
     height:auto;
-     position: absolute;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -59,8 +60,9 @@ html,body {
 .result {
     height: 30%;
     width: 60%;
-    Background:gray;
+    Background:#add8e6;
     float: right;
+    margin-bottom: 1%;
 }
     
 
@@ -94,22 +96,22 @@ html,body {
 #rec-button {
     height: 100%;
     width: 30%;
-    Background: #3cb371;
-    box-shadow: 0 5px 0 #2e8b57;
+    Background: #bee0ce;
+    box-shadow: 0 5px 0 #87e0b1;
     border-radius: 5px;
     text-align: center;
     float: left;
-    color: white;
+    color: #696969;
     border-style: none;
 }
 
 #rec-button:hover {
-    background-color: #2e8b57;
+    background-color: #87e0b1;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #rec-button:active {
-    background-color: #2e8b57;
+    background-color: #87e0b1;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
@@ -117,22 +119,22 @@ html,body {
 #search-button {
     height: 100%;
     width: 30%;
-    Background: #4169e1;
-    box-shadow: 0 5px 0 #00008b;
+    Background: #debecc;
+    box-shadow: 0 5px 0 #de9bb8;
     border-radius: 5px;
     text-align: center;
     float: right;
-    color: white;
+    color: #696969;
     border-style: none;
 }
 
 #search-button:hover {
-    background-color: #00008b;
+    background-color: #de9bb8;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #search-button:active {
-    background-color: #00008b;
+    background-color: #de9bb8;
     box-shadow: 0 0px 0 ;
     color: gray;
 }

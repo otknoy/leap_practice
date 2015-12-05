@@ -190,10 +190,9 @@ function searchData(){
 		    append(item.name).
 		    append('<br/>').
 		    append(item.score)
-	    ).trigger('create');
-
+	    ).trigger('create').append('<hr>');
 	    $('.view').show(img);
-	    
+		
 	});
 	console.log('search end');
 
