@@ -184,6 +184,10 @@ function searchData(){
 	    //console.log(item.score);
 	    $('#output').append(item.name).append('<br />');
 	    $('#output').append(item.score).append('<br />').append('<br />');
+	     // for instance
+	    var imgPath = './img/' + item.name + '.png';
+	    var img = '<img src="' + imgPath + '">';
+	    $('#output').append(img).append('<br />');
 	});
 	    console.log('search end');
 	// });
