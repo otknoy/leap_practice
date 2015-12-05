@@ -3,7 +3,7 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    Background:#696969;
+    Background:#778899;
     position: relative;
 }
 
@@ -29,7 +29,7 @@ html,body {
     height: 100%;
     width: 50%;
     float: left;
-    background: #a9a9a9;
+    background: #dcdcdc;
     overflow-y: scroll;
     overflow-x: hidden;
     color: #696969;
@@ -96,8 +96,8 @@ html,body {
 #rec-button {
     height: 100%;
     width: 30%;
-    Background: #bee0ce;
-    box-shadow: 0 5px 0 #87e0b1;
+    Background: #add8e6;
+    box-shadow: 0 5px 0 #409ecc;
     border-radius: 5px;
     text-align: center;
     float: left;
@@ -106,12 +106,12 @@ html,body {
 }
 
 #rec-button:hover {
-    background-color: #87e0b1;
+    background-color: #409ecc;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #rec-button:active {
-    background-color: #87e0b1;
+    background-color: #409ecc;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
@@ -119,8 +119,8 @@ html,body {
 #search-button {
     height: 100%;
     width: 30%;
-    Background: #debecc;
-    box-shadow: 0 5px 0 #de9bb8;
+    Background: #dda0dd;
+    box-shadow: 0 5px 0 #ba55d3;
     border-radius: 5px;
     text-align: center;
     float: right;
@@ -129,12 +129,12 @@ html,body {
 }
 
 #search-button:hover {
-    background-color: #de9bb8;
+    background-color: #ba55d3;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #search-button:active {
-    background-color: #de9bb8;
+    background-color: #ba55d3;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
