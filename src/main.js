@@ -9,6 +9,7 @@ var samples = require('./samples.json');
 
 var points = [];
 var isRecording = false;
+var result = [];
 
 Leap.loop({enableGestures: true}, function(frame){
     if(frame.hands.length <= 0){
@@ -64,17 +65,7 @@ function clear(data){
     return d;
 }
 
-// function normalize(array) {
-//     var max = Math.max.apply(null, array);
-//     var min = Math.min.apply(null, array);
 
-//     var narray = [];
-//     for (var i = 0; i < array.length; i++) {
-// 	var nv = (array[i] - min) / (max - min);
-// 	narray.push(nv);
-//     }
-//     return narray;
-// };
 
 function setNormalizeArray(arrayX,arrayY,arrayZ){
     var arrayN =[];
@@ -172,13 +163,43 @@ function distance(p1, p2) {
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-	searchTimeSeries(points);
 
     } else {
 	console.log('begin');
-    }
+	$("#output").empty();
 
+    }
     isRecording = !isRecording;
-}    
+}
+
+function searchData(){
+    if(isRecording){
+	isRecording = false;
+	console.log('search start');
+	result =searchTimeSeries(points);
+	console.log(result);
+	$.each(result, function(index, item){
+
+	    var imgPath = './img/' + item.name + '.png';
+	    var img = '<img src="' + imgPath + '">';
+  
+	    $("#output").append(
+		$("<div/>").attr('class', 'view').append(img),
+		$("<div/>").attr('class', 'result').
+		    append('<p/>').
+		    append(item.name).
+		    append('<br/>').
+		    append(item.score)
+	    ).trigger('create').append('<hr>');
+	    $('.view').show(img);
+		
+	});
+	console.log('search end');
+
+    }else{
+	console.log("nothing");
+    }
+}
 
 $('#rec-button').click(recordFinger);
+$('#search-button').click(searchData);

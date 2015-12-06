@@ -3,11 +3,11 @@ html,body {
     width: 100%;
     margin: 0;
     padding: 0;
-    Background: #a9a9a9;
+    Background:#778899;
     position: relative;
 }
 
-#input {
+#show {
     height: 90%;
     width: 95%;
     position: absolute;
@@ -18,88 +18,123 @@ html,body {
     margin: auto;
 }
 
-
-/* status setting */
-
-#status {
-    height: 10%;
+#input {
+    height: 100%;
     width: 50%;
-    float: right;
-    Background: #ff6347;
-    color: white;
-    text-align: center;
-    margin-top: 2%;
+    float: left;
+    position: relative;
 }
 
+#output {
+    height: 100%;
+    width: 50%;
+    float: left;
+    background: #dcdcdc;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    color: #696969;
+}
+
+.view {
+    height: 30%;
+    width: 40%;
+    Background:#add8e6;
+    float: left;
+    position: relative;
+    margin-bottom: 1%;
+}
+
+.view img {
+    max-width: 100%;
+    height:auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    
+}
+
+
+.result {
+    height: 30%;
+    width: 60%;
+    Background:#add8e6;
+    float: right;
+    margin-bottom: 1%;
+}
+    
 
 #sketch {
     Background: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 20%;
+    left: 0;
+    margin: auto;
+}
+
+
+
+.sketch_under {
+    height: 10%;
+    width: 90%;
+    position: absolute;
+    bottom:0;
+    left:5%;
+    right:0;
+}
+
+#logo {
+    height: 100%;
+    width: 30%;
     float: left;
-    margin-top: 2%;
-}
-
-
-/* button setting */
-
-.button {
-    height: 15%;
-    width: 50%;
-    float: right;
-    margin-top:5%;
-
-}
+ }
 
 #rec-button {
     height: 100%;
-    width: 45%;
-    Background: #3cb371;
-    box-shadow: 0 5px 0 #2e8b57;
+    width: 30%;
+    Background: #add8e6;
+    box-shadow: 0 5px 0 #409ecc;
     border-radius: 5px;
     text-align: center;
     float: left;
-    color: white;
+    color: #696969;
+    border-style: none;
 }
 
 #rec-button:hover {
-    background-color: #2e8b57;
+    background-color: #409ecc;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #rec-button:active {
-    background-color: #2e8b57;
+    background-color: #409ecc;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 
 #search-button {
     height: 100%;
-    width: 45%;
-    Background: #4169e1;
-    box-shadow: 0 5px 0 #00008b;
+    width: 30%;
+    Background: #dda0dd;
+    box-shadow: 0 5px 0 #ba55d3;
     border-radius: 5px;
     text-align: center;
     float: right;
-    color: white;
+    color: #696969;
+    border-style: none;
 }
 
 #search-button:hover {
-    background-color: #00008b;
+    background-color: #ba55d3;
     box-shadow: 0 0px 0 ;
     color: gray;
 }
 #search-button:active {
-    background-color: #00008b;
+    background-color: #ba55d3;
     box-shadow: 0 0px 0 ;
-
-}
-
-#use-img {
-    height: 43%;
-    width: 50%;
-    Background: #ffb6c1;
-    float: right;
-    margin-top:5%;
-    margin-bottom:0;
-    color: white;
-    text-align: center;
+    color: gray;
 }
