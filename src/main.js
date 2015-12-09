@@ -43,7 +43,7 @@ function getFingertip(finger){
     return point;
 }
 
-function changeOfPosition(data) {
+function changeOfPosition(data) {//ここの関数が要らない
     var n = data.length - 1;
     var d = [];
     for (var i = 0; i < n; i++) {
@@ -55,6 +55,19 @@ function changeOfPosition(data) {
     }
     return d;
 }
+
+function changeOfDistance(data) {
+    var n = data.length - 1;
+    var d = [];
+    for (var i = 0; i < n; i++) {
+	var x = Math.pow(data[i+1].x - data[i].x, 2);
+	var y = Math.pow(data[i+1].y - data[i].y, 2);
+	var z = Math.pow(data[i+1].z - data[i].z, 2);
+	d.push(Math.sqrt(x + y + z));
+    }
+    return d;
+}
+
 
 function clear(data){
     var n = data.length;
