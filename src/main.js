@@ -43,18 +43,18 @@ function getFingertip(finger){
     return point;
 }
 
-function changeOfPosition(data) {//ここの関数が要らない
-    var n = data.length - 1;
-    var d = [];
-    for (var i = 0; i < n; i++) {
-	d.push({
-	    x: data[i+1].x - data[i].x,
-	    y: data[i+1].y - data[i].y,
-	    z: data[i+1].z - data[i].z
-	});
-    }
-    return d;
-}
+// function changeOfPosition(data) {//ここの関数が要らない
+//     var n = data.length - 1;
+//     var d = [];
+//     for (var i = 0; i < n; i++) {
+// 	d.push({
+// 	    x: data[i+1].x - data[i].x,
+// 	    y: data[i+1].y - data[i].y,
+// 	    z: data[i+1].z - data[i].z
+// 	});
+//     }
+//     return d;
+// }
 
 function changeOfDistance(data) {
     var n = data.length - 1;
@@ -118,6 +118,17 @@ function normalizePoints(points) {
     return npoints;
 }
 
+function timeNormalize(array) {
+    var max = Math.max.apply(null, array);
+    var min = Math.min.apply(null, array);
+
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = (array[i] - min) / (max - min);
+	narray.push(nv);
+    }
+    return narray;
+};
 
 function extractAxis(points, axis) {
     return points.map(function(e) { return e[axis]; });
@@ -129,28 +140,34 @@ function searchTimeSeries(tsQuery) {
     var n = samples.length;
     var score = [];
 
-    var ts_Qd = changeOfPosition(tsQuery);
-    var ts_Qn = normalizePoints(ts_Qd);
-    var ts_QX = extractAxis(ts_Qn, 'x');
-    var ts_QY = extractAxis(ts_Qn, 'y');
-    var ts_QZ = extractAxis(ts_Qn, 'z');
-    var ts_QZc = clear(ts_QZ);
+    //時間的類似度を測る
+    //座標間の距離を測る
+    var ts_Qtd = changeOfDistance(tsQuery);
+    var ts_Qtn = timeNormalize(ts_Qtd);
+    // var ts_QX = extractAxis(ts_Qn, 'x');
+    // var ts_QY = extractAxis(ts_Qn, 'y');
+    // var ts_QZ = extractAxis(ts_Qn, 'z');
+    // var ts_QZc = clear(ts_QZ);
 
-    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
-    console.log(ts_Q);
+    // var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
+    console.log("ts_Qtn");
+    console.log(ts_Qtn);
 
     for (var i = 0; i < n; i++){
 
-	var ts_Sd = changeOfPosition(samples[i].points);
-	var ts_Sn = normalizePoints(ts_Sd);
-	var ts_SX = extractAxis(ts_Sn, 'x');
-	var ts_SY = extractAxis(ts_Sn, 'y');
-	var ts_SZ = extractAxis(ts_Sn, 'z');
-	var ts_SZc = clear(ts_SZ);
+	var ts_Std = changeOfDistance(samples[i].points);
+	var ts_Stn = timeNormalize(ts_Std);
+	console.log(ts_Stn);
+	// var ts_SX = extractAxis(ts_Sn, 'x');
+	// var ts_SY = extractAxis(ts_Sn, 'y');
+	// var ts_SZ = extractAxis(ts_Sn, 'z');
+	// var ts_SZc = clear(ts_SZ);
 	
-	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
+	// var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
+	//console.log("ts_Stn");
+	//console.log(ts_Stn);
 	
-	var d = DTW.distance(ts_Q, ts_S, distance, 30);
+	var d = DTW.distance(ts_Qtn, ts_Stn, distance, 30);
 	score.push({
 	    name:samples[i].name,
 	    score:d
@@ -161,7 +178,7 @@ function searchTimeSeries(tsQuery) {
 	if(a.score > b.score) return 1;
 	return 0;
     });    
-    console.log(score);
+    //console.log(score);
     return score;
 };
 
@@ -190,7 +207,7 @@ function searchData(){
 	isRecording = false;
 	console.log('search start');
 	result =searchTimeSeries(points);
-	console.log(result);
+	//console.log(result);
 	$.each(result, function(index, item){
 
 	    var imgPath = './img/' + item.name + '.png';
