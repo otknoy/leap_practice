@@ -183,10 +183,8 @@ function searchTimeSeries(tsQuery) {
 };
 
 function distance(p1, p2) {
-    var x = Math.pow(p1.x - p2.x, 2);
-    var y = Math.pow(p1.y - p2.y, 2);
-    var z = Math.pow(p1.z - p2.z, 2);
-    var d = Math.sqrt(x + y + z);
+    var p = Math.pow(p1- p2, 2);
+    var d = Math.sqrt(p);
     return d;
 };
 
@@ -207,7 +205,7 @@ function searchData(){
 	isRecording = false;
 	console.log('search start');
 	result =searchTimeSeries(points);
-	//console.log(result);
+	console.log(result);
 	$.each(result, function(index, item){
 
 	    var imgPath = './img/' + item.name + '.png';
