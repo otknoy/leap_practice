@@ -1,5 +1,6 @@
 // value を min から max で正規化
 // processing の map(value, min, max, 0, 1) と同じと考えればよし
+//空間的類似度のための正規化
 function normalize(value, min, max) {
     return (value - min) / (max - min);
 };
@@ -36,7 +37,7 @@ function clear(data){
 }
 
 
-function changeOfPosition(data) {
+function changeOfDistance(data) {
     var n = data.length - 1;
     var d = [];
     for (var i = 0; i < n; i++) {
@@ -53,10 +54,11 @@ console.log('points');
 var points = [
     {x: 1, y: 2, z: 0},
     {x: 5, y: 5, z: 0},
-    {x: 100, y: 200, z: 0}
+    {x: 10, y: 20, z: 0},
+    {x: 14, y: 29, z: 0}   
 ];
 console.log(points);
-var dpoints = changeOfPosition(points);
+var dpoints = changeOfDistance(points);
 console.log(dpoints);
 
 // console.log('Convert to 2 dimensional array');
@@ -83,3 +85,23 @@ console.log(dpoints);
 // var normalizedPoints = normalizePoints(dpoints);
 // console.log(normalizedPoints);
 // console.log();
+
+//時間的類似度のための正規化
+function timeNormalize(array) {
+    var max = Math.max.apply(null, array);
+    var min = Math.min.apply(null, array);
+
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = (array[i] - min) / (max - min);
+	narray.push(nv);
+    }
+    return narray;
+};
+
+var npoints = timeNormalize(dpoints);
+console.log("npoints"+npoints);
+
+function extractAxis(points, axis) {
+    return points.map(function(e) { return e[axis]; });
+}
