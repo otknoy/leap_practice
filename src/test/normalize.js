@@ -1,5 +1,6 @@
 // value を min から max で正規化
 // processing の map(value, min, max, 0, 1) と同じと考えればよし
+//空間的類似度のための正規化
 function normalize(value, min, max) {
     return (value - min) / (max - min);
 };
@@ -36,15 +37,14 @@ function clear(data){
 }
 
 
-function changeOfPosition(data) {
+function changeOfDistance(data) {
     var n = data.length - 1;
     var d = [];
     for (var i = 0; i < n; i++) {
-	d.push({
-	    x: data[i+1].x - data[i].x,
-	    y: data[i+1].y - data[i].y,
-	    z: data[i+1].z - data[i].z
-	});
+	var x = Math.pow(data[i+1].x - data[i].x, 2);
+	var y = Math.pow(data[i+1].y - data[i].y, 2);
+	var z = Math.pow(data[i+1].z - data[i].z, 2);
+	d.push(Math.sqrt(x + y + z));
     }
     return d;
 }
@@ -52,35 +52,56 @@ function changeOfPosition(data) {
 
 console.log('points');
 var points = [
-    {x: 1, y: 2, z: 3},
-    {x: 10, y: 20, z: 30},
-    {x: 100, y: 200, z: 300}
+    {x: 1, y: 2, z: 0},
+    {x: 5, y: 5, z: 0},
+    {x: 10, y: 20, z: 0},
+    {x: 14, y: 29, z: 0}   
 ];
 console.log(points);
-var dpoints = changeOfPosition(points);
-console.log();
+var dpoints = changeOfDistance(points);
+console.log(dpoints);
 
-console.log('Convert to 2 dimensional array');
-var d = dpoints.map(function(d) { return [d.x, d.y, d.z]; });
-console.log(d);
-console.log();
+// console.log('Convert to 2 dimensional array');
+// var d = dpoints.map(function(d) { return [d.x, d.y, d.z]; });
+// console.log(d);
+// console.log();
 
-console.log('Flatten');
-d = Array.prototype.concat.apply([], d);
-console.log(d);
-console.log();
+// console.log('Flatten');
+// d = Array.prototype.concat.apply([], d);
+// console.log(d);
+// console.log();
 
-console.log('min');
-var min = Math.min.apply(null, d);
-console.log(min);
-console.log();
+// console.log('min');
+// var min = Math.min.apply(null, d);
+// console.log(min);
+// console.log();
 
-console.log('max');
-var max = Math.max.apply(null, d);
-console.log(max);
-console.log();
+// console.log('max');
+// var max = Math.max.apply(null, d);
+// console.log(max);
+// console.log();
 
-console.log('Normalize points');
-var normalizedPoints = normalizePoints(dpoints);
-console.log(normalizedPoints);
-console.log();
+// console.log('Normalize points');
+// var normalizedPoints = normalizePoints(dpoints);
+// console.log(normalizedPoints);
+// console.log();
+
+//時間的類似度のための正規化
+function timeNormalize(array) {
+    var max = Math.max.apply(null, array);
+    var min = Math.min.apply(null, array);
+
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = (array[i] - min) / (max - min);
+	narray.push(nv);
+    }
+    return narray;
+};
+
+var npoints = timeNormalize(dpoints);
+console.log("npoints"+npoints);
+
+function extractAxis(points, axis) {
+    return points.map(function(e) { return e[axis]; });
+}
