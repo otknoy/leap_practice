@@ -20,8 +20,9 @@ var sum  = function(arr) {
 var lineLength = changeOfDistance(points);//座標間の距離を測って配列に入れる
 var totalLength  = sum(lineLength);
 
-var addpoint = decidePointZone(lineLength);
+var addpoint = decidePointZone(points);
 var totaladdpoint  = sum(addpoint);
+var checkpoint = createPoint(points);
 
 function changeOfDistance(data) {
     var n = data.length - 1;
@@ -36,7 +37,7 @@ function changeOfDistance(data) {
 }
 
 function decidePointZone(data) {
-    var n = data.length;
+    var n = data.length-1;
     var d = [];
     var all_point = 200;
 
@@ -50,7 +51,26 @@ function decidePointZone(data) {
 	return d;
 }
 
-
+function createPoint(data){
+    var n = data.length-1;
+    var d = [];
+    for(var i = 0; i< n; i++){
+	var pointNum = addpoint[i];
+	d.push({
+	    x: data[i].x,
+	    y: data[i].y,
+	    z: data[i].z
+	});
+	for(var j = 0; j < pointNum; j++){
+	    d.push({
+		x: data[i].x + j*(data[i+1].x -data[i].x)/(pointNum + 1),
+		y: data[i].y + j*(data[i+1].y -data[i].y)/(pointNum + 1),
+		z: data[i].z + j*(data[i+1].z -data[i].z)/(pointNum + 1)
+	    });
+	}
+    }
+    return d;
+}
 
 
 var arr = [1, 2, 3, 4, 5];
@@ -63,4 +83,4 @@ console.log("totaladdpoint");
 console.log(totaladdpoint);
 console.log(points);
 console.log(lineLength);
-
+console.log(checkpoint);
