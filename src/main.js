@@ -1,18 +1,21 @@
-var DTW = require('./dtw.js');
 var $ = require('jquery');
 var Leap = require('leapjs');
+
+var DTW = require('./dtw.js');
 var Sketch = require('./sketch.js');
+
 var showColor = '#87ceeb';
 var drawColor = '#000080';
+
 var sketch = new Sketch('sketch');
 var samples = require('./samples.json');
-
 var points = [];
 var isRecording = false;
 var result = [];
+
 var sum  = function(arr) {
     var sum = 0;
-    for (var i=0,len=arr.length; i<len; ++i) {
+    for (var i = 0, len = arr.length; i < len; ++i) {
         sum += arr[i];
     };
     return sum;
@@ -43,10 +46,11 @@ Leap.loop({enableGestures: true}, function(frame){
 });
 
 function getFingertip(finger){
-    var point = {"x": finger.tipPosition[0],
-		 "y": finger.tipPosition[1],
-		 "z": finger.tipPosition[2]
-		};
+    var point = {
+	"x": finger.tipPosition[0],
+	"y": finger.tipPosition[1],
+	"z": finger.tipPosition[2]
+    };
     return point;
 }
 
@@ -85,8 +89,8 @@ function clear(data){
     return d;
 }
 
-function setNormalizeArray(arrayX,arrayY,arrayZ){
-    var arrayN =[];
+function setNormalizeArray(arrayX, arrayY, arrayZ){
+    var arrayN = [];
     for (var i = 0; i < arrayX.length; i++) {
 	arrayN.push({
 	    x: arrayX[i],
@@ -135,23 +139,23 @@ function timeNormalize(array) {
     return narray;
 };
 
-function decidePointZone(data,lineLength,totalLength) {
-    var n = data.length-1;
+function decidePointZone(data, lineLength, totalLength) {
+    var n = data.length - 1;
     var d = [];
     var all_point = 200;
 
     for (var i = 0; i < n; i++) {
 	var insert = (all_point - 1) * lineLength[i]/totalLength;
 	if(insert > 0){
-	    d.push( parseInt(insert - 1));
+	    d.push(parseInt(insert - 1));
 	}
- //console.log("no_"+i+":"+d[i]);
+	// console.log("no_"+i+":"+d[i]);
     }
-	return d;
+    return d;
 }
 
-function createPoint(data,addpoint){
-    var n = data.length-1;
+function createPoint(data, addpoint){
+    var n = data.length - 1;
     var d = [];
     for(var i = 0; i< n; i++){
 	var pointNum = addpoint[i];
@@ -162,9 +166,9 @@ function createPoint(data,addpoint){
 	});
 	for(var j = 0; j < pointNum; j++){
 	    d.push({
-		x: data[i].x + j*(data[i+1].x -data[i].x)/(pointNum + 1),
-		y: data[i].y + j*(data[i+1].y -data[i].y)/(pointNum + 1),
-		z: data[i].z + j*(data[i+1].z -data[i].z)/(pointNum + 1)
+		x: data[i].x + j*(data[i+1].x - data[i].x)/(pointNum + 1),
+		y: data[i].y + j*(data[i+1].y - data[i].y)/(pointNum + 1),
+		z: data[i].z + j*(data[i+1].z - data[i].z)/(pointNum + 1)
 	    });
 	}
     }
@@ -187,9 +191,9 @@ function searchTimeSeries(tsQuery) {
     var QlineLength = changeOfDistance(tsQuery);
     var Qtn = timeNormalize(QlineLength);
     var QtotalLength = sum(QlineLength);
-    var Qaddpoint = decidePointZone(tsQuery,QlineLength,QtotalLength);
+    var Qaddpoint = decidePointZone(tsQuery, QlineLength, QtotalLength);
     var Qtotaladdpoint  = sum(Qaddpoint);
-    var Qcheckpoint = createPoint(tsQuery,Qaddpoint);
+    var Qcheckpoint = createPoint(tsQuery, Qaddpoint);
     var ts_QX = extractAxis(Qcheckpoint, 'x');
     var ts_QY = extractAxis(Qcheckpoint, 'y');
     var ts_QZ = extractAxis(Qcheckpoint, 'z');
@@ -198,7 +202,7 @@ function searchTimeSeries(tsQuery) {
     var Qsn =  spaceNormalize(ts_Q);
     var n_QX = extractAxis(Qsn, 'x');
     var n_QY = extractAxis(Qsn, 'y');
-//    var n_QZ = extractAxis(Qsn, 'z');
+    // var n_QZ = extractAxis(Qsn, 'z');
 
     console.log("Qtn");
     console.log(Qtn);
@@ -206,13 +210,12 @@ function searchTimeSeries(tsQuery) {
     console.log(n_QX);
 
     for (var i = 0; i < n; i++){
-
 	var SlineLength = changeOfDistance(samples[i].points);
 	var Stn = timeNormalize(SlineLength);
 	var StotalLength = sum(SlineLength);
-	var Saddpoint = decidePointZone(samples[i].points,SlineLength,StotalLength);
+	var Saddpoint = decidePointZone(samples[i].points, SlineLength, StotalLength);
 	var Stotaladdpoint  = sum(Saddpoint);
-	var Scheckpoint = createPoint(samples[i].points,Saddpoint);
+	var Scheckpoint = createPoint(samples[i].points, Saddpoint);
 	var ts_SX = extractAxis(Scheckpoint, 'x');
 	var ts_SY = extractAxis(Scheckpoint, 'y');
 	var ts_SZ = extractAxis(Scheckpoint, 'z');
@@ -221,7 +224,7 @@ function searchTimeSeries(tsQuery) {
 	var Ssn =  spaceNormalize(ts_S);
 	var n_SX = extractAxis(Ssn, 'x');
 	var n_SY = extractAxis(Ssn, 'y');
-//    var n_QZ = extractAxis(Qsn, 'z');
+	// var n_QZ = extractAxis(Qsn, 'z');
 
 	// console.log("Stn");
 	// console.log(Stn);
@@ -232,9 +235,9 @@ function searchTimeSeries(tsQuery) {
 	var sdX = DTW.distance(n_QX, n_SX, distance, 30);
 	var sdY = DTW.distance(n_QY, n_SY, distance, 30);
 	score.push({
-	    name:samples[i].name,
-	    score:sdX*sdY*td
-	    //parseInt(0.7*(sdX*sdY)+0.3*td)
+	    name: samples[i].name,
+	    score: sdX*sdY*td
+	    // parseInt(0.7*(sdX*sdY)+0.3*td)
 	});
     }
     score.sort(function(a,b){
@@ -242,12 +245,12 @@ function searchTimeSeries(tsQuery) {
 	if(a.score > b.score) return 1;
 	return 0;
     });    
-    //console.log(score);
+    // console.log(score);
     return score;
 };
 
 function distance(p1, p2) {
-    var p = Math.pow(p1- p2, 2);
+    var p = Math.pow(p1 - p2, 2);
     var d = Math.sqrt(p);
     return d;
 };
@@ -255,11 +258,9 @@ function distance(p1, p2) {
 function recordFinger(){
     if (isRecording) {
 	console.log('end');
-
     } else {
 	console.log('begin');
 	$("#output").empty();
-
     }
     isRecording = !isRecording;
 }
@@ -268,10 +269,9 @@ function searchData(){
     if(isRecording){
 	isRecording = false;
 	console.log('search start');
-	result =searchTimeSeries(points);
+	result = searchTimeSeries(points);
 	console.log(result);
 	$.each(result, function(index, item){
-
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
   
@@ -284,7 +284,6 @@ function searchData(){
 		    append(item.score)
 	    ).trigger('create').append('<hr>');
 	    $('.view').show(img);
-		
 	});
 	console.log('search end');
 
