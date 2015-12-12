@@ -10,6 +10,13 @@ var samples = require('./samples.json');
 var points = [];
 var isRecording = false;
 var result = [];
+var sum  = function(arr) {
+    var sum = 0;
+    for (var i=0,len=arr.length; i<len; ++i) {
+        sum += arr[i];
+    };
+    return sum;
+};
 
 Leap.loop({enableGestures: true}, function(frame){
     if(frame.hands.length <= 0){
@@ -78,8 +85,6 @@ function clear(data){
     return d;
 }
 
-
-
 function setNormalizeArray(arrayX,arrayY,arrayZ){
     var arrayN =[];
     for (var i = 0; i < arrayX.length; i++) {
@@ -97,7 +102,7 @@ function normalize(value, min, max) {
 };
 
 // points を min から max で正規化
-function normalizePoints(points) {
+function spaceNormalize(points) {
     var d = points.map(function(d) { return [d.x, d.y, d.z]; });
     var ary = Array.prototype.concat.apply([], d);
     var min = Math.min.apply(null, ary);
@@ -130,6 +135,43 @@ function timeNormalize(array) {
     return narray;
 };
 
+function decidePointZone(data,lineLength,totalLength) {
+    var n = data.length-1;
+    var d = [];
+    var all_point = 200;
+
+    for (var i = 0; i < n; i++) {
+	var insert = (all_point - 1) * lineLength[i]/totalLength;
+	if(insert > 0){
+	    d.push( parseInt(insert - 1));
+	}
+ //console.log("no_"+i+":"+d[i]);
+    }
+	return d;
+}
+
+function createPoint(data,addpoint){
+    var n = data.length-1;
+    var d = [];
+    for(var i = 0; i< n; i++){
+	var pointNum = addpoint[i];
+	d.push({
+	    x: data[i].x,
+	    y: data[i].y,
+	    z: data[i].z
+	});
+	for(var j = 0; j < pointNum; j++){
+	    d.push({
+		x: data[i].x + j*(data[i+1].x -data[i].x)/(pointNum + 1),
+		y: data[i].y + j*(data[i+1].y -data[i].y)/(pointNum + 1),
+		z: data[i].z + j*(data[i+1].z -data[i].z)/(pointNum + 1)
+	    });
+	}
+    }
+    return d;
+}
+
+
 function extractAxis(points, axis) {
     return points.map(function(e) { return e[axis]; });
 }
@@ -142,35 +184,57 @@ function searchTimeSeries(tsQuery) {
 
     //時間的類似度を測る
     //座標間の距離を測る
-    var ts_Qtd = changeOfDistance(tsQuery);
-    var ts_Qtn = timeNormalize(ts_Qtd);
-    // var ts_QX = extractAxis(ts_Qn, 'x');
-    // var ts_QY = extractAxis(ts_Qn, 'y');
-    // var ts_QZ = extractAxis(ts_Qn, 'z');
-    // var ts_QZc = clear(ts_QZ);
+    var QlineLength = changeOfDistance(tsQuery);
+    var Qtn = timeNormalize(QlineLength);
+    var QtotalLength = sum(QlineLength);
+    var Qaddpoint = decidePointZone(tsQuery,QlineLength,QtotalLength);
+    var Qtotaladdpoint  = sum(Qaddpoint);
+    var Qcheckpoint = createPoint(tsQuery,Qaddpoint);
+    var ts_QX = extractAxis(Qcheckpoint, 'x');
+    var ts_QY = extractAxis(Qcheckpoint, 'y');
+    var ts_QZ = extractAxis(Qcheckpoint, 'z');
+    var ts_QZc = clear(ts_QZ);
+    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
+    var Qsn =  spaceNormalize(ts_Q);
+    var n_QX = extractAxis(Qsn, 'x');
+    var n_QY = extractAxis(Qsn, 'y');
+//    var n_QZ = extractAxis(Qsn, 'z');
 
-    // var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);
-    console.log("ts_Qtn");
-    console.log(ts_Qtn);
+    console.log("Qtn");
+    console.log(Qtn);
+    console.log("n_QX");
+    console.log(n_QX);
 
     for (var i = 0; i < n; i++){
 
-	var ts_Std = changeOfDistance(samples[i].points);
-	var ts_Stn = timeNormalize(ts_Std);
-	console.log(ts_Stn);
-	// var ts_SX = extractAxis(ts_Sn, 'x');
-	// var ts_SY = extractAxis(ts_Sn, 'y');
-	// var ts_SZ = extractAxis(ts_Sn, 'z');
-	// var ts_SZc = clear(ts_SZ);
+	var SlineLength = changeOfDistance(samples[i].points);
+	var Stn = timeNormalize(SlineLength);
+	var StotalLength = sum(SlineLength);
+	var Saddpoint = decidePointZone(samples[i].points,SlineLength,StotalLength);
+	var Stotaladdpoint  = sum(Saddpoint);
+	var Scheckpoint = createPoint(samples[i].points,Saddpoint);
+	var ts_SX = extractAxis(Scheckpoint, 'x');
+	var ts_SY = extractAxis(Scheckpoint, 'y');
+	var ts_SZ = extractAxis(Scheckpoint, 'z');
+	var ts_SZc = clear(ts_SZ);
+	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
+	var Ssn =  spaceNormalize(ts_S);
+	var n_SX = extractAxis(Ssn, 'x');
+	var n_SY = extractAxis(Ssn, 'y');
+//    var n_QZ = extractAxis(Qsn, 'z');
+
+	// console.log("Stn");
+	// console.log(Stn);
+	// console.log("Ssn");
+	// console.log(Ssn);
 	
-	// var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);
-	//console.log("ts_Stn");
-	//console.log(ts_Stn);
-	
-	var d = DTW.distance(ts_Qtn, ts_Stn, distance, 30);
+	var td = DTW.distance(Qtn, Stn, distance, 30);
+	var sdX = DTW.distance(n_QX, n_SX, distance, 30);
+	var sdY = DTW.distance(n_QY, n_SY, distance, 30);
 	score.push({
 	    name:samples[i].name,
-	    score:d
+	    score:sdX*sdY*td
+	    //parseInt(0.7*(sdX*sdY)+0.3*td)
 	});
     }
     score.sort(function(a,b){
