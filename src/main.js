@@ -274,10 +274,10 @@ function drawTimeSeriesData(id, points) {
 	var x = mapValue(p.x, -256, 256, 0, w);
 	var y = mapValue(p.y, -256, 256, h, 0);
 
-        ctx.clearRect(0, 0, w, h);
+	ctx.clearRect(0, 0, w, h);
 
 	ctx.strokeStyle = '#6DD900';
-        ctx.beginPath();
+	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, Math.PI*2, false);
 	ctx.stroke();
 	// console.log('draw point');
