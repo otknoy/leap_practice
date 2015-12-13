@@ -251,7 +251,10 @@ function recordFinger(){
     isRecording = !isRecording;
 }
 
-function drawData(id, points) {
+// 指定した canvas 要素に時系列データをアニメーションで描く
+// id: 時系列データを表示したい canvas 要素の id
+// points: 時系列データ ([{x: 1, y: 2, z: 3}, ... ] のような配列)
+function drawTimeSeriesData(id, points) {
     var cs  = document.getElementById(id);
     var ctx = cs.getContext('2d');
     var w = cs.width;
@@ -319,7 +322,7 @@ function searchData(){
 	    // 任意の位置にキャンバスを追加
 	    $("#output").append($canvas);
 	    // 指定した id のキャンバスに points を描く
-	    drawData('canvas-' + item.name, item.points);
+	    drawTimeSeriesData('canvas-' + item.name, item.points);
 	});
 	console.log('search end');
 
