@@ -221,8 +221,9 @@ function searchTimeSeries(tsQuery) {
 	var sdY = DTW.distance(n_QY, n_SY, distance, 30);
 	score.push({
 	    name: samples[i].name,
-	    score: sdX*sdY*td
+	    score: sdX*sdY*td,
 	    // parseInt(0.7*(sdX*sdY)+0.3*td)
+	    points: samples[i].points
 	});
     }
     score.sort(function(a,b){
