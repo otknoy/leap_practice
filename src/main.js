@@ -142,7 +142,7 @@ function decidePointZone(data, lineLength, totalLength) {
 }
 
 function createPoint(data,addpoint){//線形補完を行っている
-    var n = data.length-1;
+    var n = data.length - 1;
     var d = [];
     for(var i = 0; i< n; i++){
 	var pointNum = addpoint[i];
