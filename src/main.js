@@ -276,7 +276,7 @@ function drawTimeSeriesData(id, points) {
 
 	ctx.clearRect(0, 0, w, h);
 
-	ctx.strokeStyle = '#6DD900';
+	ctx.strokeStyle = drawColor;
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, Math.PI*2, false);
 	ctx.stroke();
@@ -310,7 +310,7 @@ function searchData(){
 		    append(item.name).
 		    append('<br/>').
 		    append(item.score)
-	    ).trigger('create').append('<hr>');
+	    ).trigger('create');
 	    $('.view').show(img);
 
 	    // 動的にキャンバスを作成
@@ -320,7 +320,10 @@ function searchData(){
 		height: 160
 	    });
 	    // 任意の位置にキャンバスを追加
-	    $("#output").append($canvas);
+//	    $("#output").append($canvas);
+	    $("#output").append(
+		$("<div/>").attr('class', 'move').append($canvas)
+	    ).trigger('create');
 	    // 指定した id のキャンバスに points を描く
 	    drawTimeSeriesData('canvas-' + item.name, item.points);
 	});
