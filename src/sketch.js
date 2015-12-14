@@ -1,6 +1,8 @@
 var Sketch = function(id, enableMouseDrag) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
+    //this.context.translate(this.canvas.width/2, this.canvas.height);
+    //leapの原点の位置を考えた場合
     this.context.translate(this.canvas.width/2, this.canvas.height/2);
     this.mousePressed = false;
     this.mouseX = 0;
@@ -24,6 +26,8 @@ Sketch.prototype.setStrokeStyle =  function(color) {
 };
 
 Sketch.prototype.clear = function() {
+    // this.context.clearRect(-this.canvas.width/2, -this.canvas.height, this.canvas.width, this.canvas.height);
+    //leapの原点を考えた場合
     this.context.clearRect(-this.canvas.width/2, -this.canvas.height/2, this.canvas.width, this.canvas.height);
 };
 
