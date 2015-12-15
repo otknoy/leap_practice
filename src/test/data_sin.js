@@ -4,12 +4,15 @@ var A = 100;//振幅
 var p = 0.0;//初期位相
 var w = 1.0;//角周波数
 var t_end = 275;
-var speed =24.0;//high//slow6.0//normal12//アニメーションのスピード
+var speed =24;//high24//slow6.0//normal12//アニメーションのスピード
 
     for(var t = -275; t < t_end; t += speed){
 	var d = [];
 	var rad = t * (Math.PI / 180);
 	x = t;
+	if(t > 0){
+	    speed = 6.0;
+	}
 	y = A*(Math.sin(w*(rad) + p))+275;
 	d.push({
 	    "x": x,
