@@ -8,7 +8,8 @@ var showColor = '#87ceeb';
 var drawColor = '#000080';
 
 var sketch = new Sketch('sketch');
-var samples = require('./samples.json');
+// var samples = require('./samples.json');
+var samples = require('./test/data.json');
 var points = [];
 var isRecording = false;
 var result = [];
@@ -257,9 +258,10 @@ function recordFinger(){
 function drawTimeSeriesData(id, points) {
     var cs  = document.getElementById(id);
     var ctx = cs.getContext('2d');
+
     var w = cs.width;
     var h = cs.height;
-
+    
     // processing の map 関数と同じやつ
     function mapValue(value, start1, stop1, start2, stop2) {
 	var ratio = (value - start1) / (stop1 - start1);
@@ -272,7 +274,7 @@ function drawTimeSeriesData(id, points) {
     function render() {
 	var p = points[i];
 	var x = mapValue(p.x, -256, 256, 0, w);
-	var y = mapValue(p.y, -256, 256, h, 0);
+	var y = mapValue(p.y, 0, 550, h, 0);
 
 	ctx.clearRect(0, 0, w, h);
 
@@ -289,7 +291,6 @@ function drawTimeSeriesData(id, points) {
 	    i = 0;
 	}
     }
-
     setInterval(render, 1000/60.0);
 }
 
