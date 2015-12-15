@@ -10,16 +10,21 @@ var speed =24;//high24//slow6.0//normal12//アニメーションのスピード
 	var d = [];
 	var rad = t * (Math.PI / 180);
 	x = t;
-	if(t > 0){
-	    speed = 6.0;
-	}
+	// if(t > 0){
+	//     speed = 6.0;
+	// }
+	
+
 	y = A*(Math.sin(w*(rad) + p))+275;
 	d.push({
 	    "x": x,
 	    "y": y,
 	    "z": 0
 	});
-	console.log(d);
+	    console.log(d);
+	if(speed > 6){
+	    speed --;
+	}
 //	console.log(y);
     }
 
