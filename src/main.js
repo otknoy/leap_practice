@@ -276,7 +276,7 @@ function drawTimeSeriesData(id, points) {
 	var x = mapValue(p.x, -256, 256, 0, w);
 	var y = mapValue(p.y, 0, 550, h, 0);
 
-	ctx.clearRect(0, 0, w, h);
+//	ctx.clearRect(0, 0, w, h);
 
 	ctx.strokeStyle = drawColor;
 	ctx.beginPath();
