@@ -329,6 +329,7 @@ function searchData(){
 	    drawTimeSeriesData('canvas-' + item.name, item.points);
 	});
 	console.log('search end');
+	console.log(points);
 
     }else{
 	console.log("nothing");
