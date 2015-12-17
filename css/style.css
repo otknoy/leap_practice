@@ -37,7 +37,7 @@ html,body {
 
 .view {
     height: 30%;
-    width: 40%;
+    width: 30%;
     Background:#add8e6;
     float: left;
     position: relative;
@@ -56,13 +56,22 @@ html,body {
     
 }
 
+.move {
+    height: 30%;
+    width: 30%;
+    Background:#add8e6;
+    float: left;
+    position: relative;
+    margin-bottom: 1%;
+}
 
 .result {
     height: 30%;
-    width: 60%;
+    width: 40%;
     Background:#add8e6;
     float: right;
     margin-bottom: 1%;
+    font-size:xx-small;
 }
     
 

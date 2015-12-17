@@ -1,7 +1,10 @@
 var Sketch = function(id, enableMouseDrag) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
-    this.context.translate(this.canvas.width/2, this.canvas.height/2);
+    this.context.translate(this.canvas.width/2, this.canvas.height);
+    //leapの原点の位置を考えた場合
+    //this.context.translate(this.canvas.width/2, this.canvas.height/2);
+    //canvasの中心を原点と考えたとき
     this.mousePressed = false;
     this.mouseX = 0;
     this.mouseY = 0;
@@ -13,7 +16,7 @@ var Sketch = function(id, enableMouseDrag) {
 
 Sketch.prototype.drawCircle =  function(x, y) {
     this.context.beginPath();
-//    this.context.strokeStyle = '#6DD900';
+    //this.context.strokeStyle = '#6DD900';
     this.context.arc(x, y, 12, 0, Math.PI*2, false);
     this.context.stroke();
 };
@@ -24,7 +27,10 @@ Sketch.prototype.setStrokeStyle =  function(color) {
 };
 
 Sketch.prototype.clear = function() {
-    this.context.clearRect(-this.canvas.width/2, -this.canvas.height/2, this.canvas.width, this.canvas.height);
+     this.context.clearRect(-this.canvas.width/2, -this.canvas.height, this.canvas.width, this.canvas.height);
+    //leapの原点を考えた場合
+    //this.context.clearRect(-this.canvas.width/2, -this.canvas.height/2, this.canvas.width, this.canvas.height);
+    //canvasの中心を原点と考えたとき
 };
 
 
