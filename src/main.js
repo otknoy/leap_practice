@@ -90,7 +90,12 @@ function setNormalizeArray(arrayX, arrayY, arrayZ){
 }
 
 function normalize(value, min, max) {
-    return (value - min) / (max - min);
+    if(min == max){
+	var d = 0;
+    }else{
+	d = (value - min) / (max - min);
+    }
+    return d;
 };
 
 // points を min から max で正規化
@@ -121,7 +126,11 @@ function timeNormalize(array) {
 
     var narray = [];
     for (var i = 0; i < array.length; i++) {
-	var nv = (array[i] - min) / (max - min);
+	if(min == max){
+	    var nv = 0;
+	}else{
+	    nv = (array[i] - min) / (max - min);
+	}
 	narray.push(nv);
     }
     return narray;
@@ -228,9 +237,9 @@ function searchTimeSeries(tsQuery) {
 	});
     }
     score.sort(function(a,b){
-	if(a.score < b.score) return -1;
-	if(a.score > b.score) return 1;
-	return 0;
+    	if(a.score < b.score) return -1;
+    	if(a.score > b.score) return 1;
+    	return 0;
     });    
     // console.log(score);
     return score;
@@ -276,7 +285,7 @@ function drawTimeSeriesData(id, points) {
 	var x = mapValue(p.x, -256, 256, 0, w);
 	var y = mapValue(p.y, 0, 550, h, 0);
 
-//	ctx.clearRect(0, 0, w, h);
+	ctx.clearRect(0, 0, w, h);
 
 	ctx.strokeStyle = drawColor;
 	ctx.beginPath();
