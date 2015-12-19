@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var Leap = require('leapjs');
 
+var LinearInterpolation = require('./LinearInterpolation.js');
 var DTW = require('./dtw.js');
 var Sketch = require('./sketch.js');
 
@@ -13,14 +14,6 @@ var samples = require('./test/data.json');
 var points = [];
 var isRecording = false;
 var result = [];
-
-var sum  = function(arr) {
-    var sum = 0;
-    for (var i = 0, len = arr.length; i < len; ++i) {
-        sum += arr[i];
-    };
-    return sum;
-};
 
 Leap.loop({enableGestures: true}, function(frame){
     if(frame.hands.length <= 0){
@@ -136,43 +129,6 @@ function timeNormalize(array) {
     return narray;
 };
 
-function decidePointZone(data, lineLength, totalLength) {
-    var n = data.length - 1;
-    var d = [];
-    var all_point = 200;
-
-    for (var i = 0; i < n; i++) {
-	var insert = (all_point - 1) * lineLength[i]/totalLength;
-	if(insert > 0){
-	    d.push(parseInt(insert - 1));
-	}
-	// console.log("no_"+i+":"+d[i]);
-    }
-    return d;
-}
-
-function createPoint(data,addpoint){//線形補完を行っている
-    var n = data.length - 1;
-    var d = [];
-    for(var i = 0; i< n; i++){
-	var pointNum = addpoint[i];
-	d.push({
-	    x: data[i].x,
-	    y: data[i].y,
-	    z: data[i].z
-	});
-	for(var j = 0; j < pointNum; j++){
-	    d.push({
-		x: data[i].x + j*(data[i+1].x - data[i].x)/(pointNum + 1),
-		y: data[i].y + j*(data[i+1].y - data[i].y)/(pointNum + 1),
-		z: data[i].z + j*(data[i+1].z - data[i].z)/(pointNum + 1)
-	    });
-	}
-    }
-    return d;
-}
-
-
 function extractAxis(points, axis) {//各軸の座標を抜き出している
     return points.map(function(e) { return e[axis]; });
 }
@@ -187,15 +143,17 @@ function searchTimeSeries(tsQuery) {
     //座標間の距離を測る
     var QlineLength = changeOfDistance(tsQuery);//leapで入力した座標間の距離を測っている
     var Qtn = timeNormalize(QlineLength);//時間的類似度を測るまえに正規化
-    var QtotalLength = sum(QlineLength);//leapで入力した座標間の全部の距離を測っている
-    var Qaddpoint = decidePointZone(tsQuery,QlineLength,QtotalLength);//補完するための点が何点あるのかを数えている
-    var Qcheckpoint = createPoint(tsQuery,Qaddpoint);//線形補完している
+
+    var Qcheckpoint = LinearInterpolation.compute(tsQuery);
+
     var ts_QX = extractAxis(Qcheckpoint, 'x');
     var ts_QY = extractAxis(Qcheckpoint, 'y');
     var ts_QZ = extractAxis(Qcheckpoint, 'z');
     var ts_QZc = clear(ts_QZ);//z軸の座標を全部0にしている
     var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);//各軸の連想配列にもう一度している
+
     var Qsn =  spaceNormalize(ts_Q);//空間的類似度を測るまえに正規化
+
     var n_QX = extractAxis(Qsn, 'x');//x軸とy軸に分けている
     var n_QY = extractAxis(Qsn, 'y');
     // var n_QZ = extractAxis(Qsn, 'z');
@@ -208,9 +166,9 @@ function searchTimeSeries(tsQuery) {
     for (var i = 0; i < n; i++){
 	var SlineLength = changeOfDistance(samples[i].points);//座標間の距離を測っている
 	var Stn = timeNormalize(SlineLength);//時間的類似度を測るまえに正規化
-	var StotalLength = sum(SlineLength);//座標間の全部の距離を測っている
-	var Saddpoint = decidePointZone(samples[i].points,SlineLength,StotalLength);//補完するための点が何点あるのかを数えている
-	var Scheckpoint = createPoint(samples[i].points,Saddpoint);//線形補完している
+
+	var Scheckpoint = LinearInterpolation.compute(samples[i].points);
+
 	var ts_SX = extractAxis(Scheckpoint, 'x');
 	var ts_SY = extractAxis(Scheckpoint, 'y');
 	var ts_SZ = extractAxis(Scheckpoint, 'z');
