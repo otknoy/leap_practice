@@ -265,13 +265,8 @@ function searchData(){
     if(isRecording){
 	isRecording = false;
 	console.log('search start');
-
-	console.log('query: ' + samples[0].name);
-	result = searchTimeSeries(samples[0].points);
-	result.forEach(function(item) {
-	    console.log('name: ' + item.name + ', score: ' + item.score);
-	});
-
+	result = searchTimeSeries(points);
+	console.log(result);
 	$.each(result, function(index, item){
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
