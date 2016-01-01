@@ -84,7 +84,7 @@ function setNormalizeArray(arrayX, arrayY, arrayZ){
 
 function normalize(value, min, max) {
     if(min == max){
-	var d = 0;
+	var d = 0.5;
     }else{
 	d = (value - min) / (max - min);
     }
@@ -120,7 +120,7 @@ function timeNormalize(array) {
     var narray = [];
     for (var i = 0; i < array.length; i++) {
 	if(min == max){
-	    var nv = 0;
+	    var nv = 0.5;
 	}else{
 	    nv = (array[i] - min) / (max - min);
 	}
