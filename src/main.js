@@ -276,15 +276,19 @@ function searchData(){
 	    $("#output").append(
 		$("<div/>").attr('class', 'view').append(img),
 		$("<div/>").attr('class', 'result').
-		    append('<p/>').
-		    append(item.name).
+		    append('<p>'+item.name+'</p>').
+		    append('<br/>').
+		    append("total score").
 		    append('<br/>').
 		    append(item.score).
 		    append('<br/>').
+		    append("spatial score").
+		    append('<br/>').
 		    append(item.score_s).
 		    append('<br/>').
+		    append("temporal score").
+		    append('<br/>').
 		    append(item.score_t)
-	
 	    ).trigger('create');
 	    $('.view').show(img);
 

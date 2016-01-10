@@ -174,7 +174,7 @@
 	]
     },
     {
-	"name":"sin(slow_to_fast)",
+	"name":"sin(slow_fast)",
 	"points":
 	[
 	    { "x": -275, "y": 374.6194698091746, "z": 0 } ,
@@ -238,7 +238,7 @@
 	]
     },
     {
-	"name":"sin(fast_to_slow)",
+	"name":"sin(fast_slow)",
 	"points":
 	[
 	    { "x": -275, "y": 374.6194698091746, "z": 0 } ,
@@ -300,7 +300,7 @@
 	]
     },
     {
-	"name": "sin(slow_to_fast_step_by_step)",
+	"name": "sin(slow_fast_gradually)",
 	"points":
 	[
 	    { "x": -275, "y": 374.6194698091746, "z": 0 } ,
@@ -337,7 +337,7 @@
 	]
     },
     {
-	"name":"sin(fast_to_slow_step_by_step)",
+	"name":"sin(fast_slow_gradually)",
 	"points":
 	[
 	    { "x": -275, "y": 374.6194698091746, "z": 0 } ,
@@ -410,7 +410,7 @@
 	]
     },
     {
-	"name": "sin(slow_reverse)",
+	"name": "sin(slow_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -508,7 +508,7 @@
 	]
     },
     {
-	"name":"sin(normal_reverse)",
+	"name":"sin(normal_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -560,7 +560,7 @@
 	]
     },
     {
-	"name":"sin(fast_reverse)",
+	"name":"sin(fast_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -589,7 +589,7 @@
 	]
     },
     {
-	"name": "sin(fast_to_slow_reverse)",
+	"name": "sin(fast_slow_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -649,7 +649,7 @@
 	]
     },
     {
-	"name": "sin(slow_to_fast_reverse)",
+	"name": "sin(slow_fast_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -713,7 +713,7 @@
 	]
     },
     {
-	"name":"sin(slow_to_fast_step_by_step_reverse)",
+	"name":"sin(slow_fast_gradually_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -749,7 +749,7 @@
 	]
     },
     {
-	"name": "sin(fast_to_slow_step_by_step_reverse)",
+	"name": "sin(fast_slow_gradually_R)",
 	"points":
 	[
 	    { "x": 275, "y": 175.38053019082543, "z": 0 } ,
@@ -1179,7 +1179,7 @@
 	]
     },
     {
-	"name":"circle(slow_to_fast)",
+	"name":"circle(slow_fast)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1306,7 +1306,7 @@
 	]
     },
     {
-	"name":"circle(fast_to_slow)",
+	"name":"circle(fast_slow)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1436,7 +1436,7 @@
 	]
     },
     {
-	"name":"circle(fast_to_slow_step_by_step)",
+	"name":"circle(fast_slow_gradually)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1587,7 +1587,7 @@
 	]
     },
     {
-	"name":"circle(slow_to_fast_step_by_step)",
+	"name":"circle(slow_fast_gradually)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1653,7 +1653,7 @@
 	]
     },
     {
-	"name":"circle(slow_reverse)",
+	"name":"circle(slow_R)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1835,7 +1835,7 @@
 	]
     },
     {
-	"name":"circle(normal_reverse)",
+	"name":"circle(normal_R)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1932,7 +1932,7 @@
 
     },
     {
-	"name":"circle(fast_reverse)",
+	"name":"circle(fast_R)",
 	"points":
 	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -1981,7 +1981,7 @@
 	]
     },
     {
-    	"name":"circle(slow_to_fast_reverse)",
+    	"name":"circle(slow_fast_R)",
     	"points":
     	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -2107,7 +2107,7 @@
 	]
     },
     {
-    	"name":"circle(fast_to_slow_reverse)",
+    	"name":"circle(fast_slow_R)",
     	"points":
     	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -2213,7 +2213,7 @@
 	]
     },
     {
-    	"name":"circle(slow_to_fast_step_by_step_reverse)",
+    	"name":"circle(slow_fast_gradually_R)",
     	"points":
     	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -2283,7 +2283,7 @@
 	]
     },
     {
-    	"name":"circle(fast_to_slow_step_by_step_reverse)",
+    	"name":"circle(fast_slow_gradually_R)",
     	"points":
     	[
 	    { "x": 137, "y": 275, "z": 0 } ,
@@ -2422,7 +2422,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow)",
+	"name":"h_line(slow)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2520,7 +2520,7 @@
 	]
     },
     {
-	"name":"horizontal_line(normal)",
+	"name":"h_line(normal)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2572,7 +2572,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast)",
+	"name":"h_line(fast)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2601,7 +2601,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast_to_slow)",
+	"name":"h_line(fast_slow)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2663,7 +2663,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow_to_fast)",
+	"name":"h_line(slow_fast)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2727,7 +2727,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast_to_slow_step_by_step)",
+	"name":"h_line(fast_slow_gradually)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2800,7 +2800,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow_to_fast_step_by_step)",
+	"name":"h_line(slow_fast_gradually)",
 	"points":
 	[
 	    { "x": -275, "y": 275, "z": 0 } ,
@@ -2836,7 +2836,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow_reverse)",
+	"name":"h_line(slow_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -2935,7 +2935,7 @@
 	]
     },
     {
-	"name":"horizontal_line(normal_reverse)",
+	"name":"h_line(normal_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -2987,7 +2987,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast_reverse)",
+	"name":"h_line(fast_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -3016,7 +3016,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow_to_fast_reverse)",
+	"name":"h_line(slow_fast_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -3080,7 +3080,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast_to_slow_reverse)",
+	"name":"h_line(fast_slow_R)",
 	"points":
 	[
 
@@ -3143,7 +3143,7 @@
 	]
     },
     {
-	"name":"horizontal_line(slow_to_fast_step_by_step_reverse)",
+	"name":"h_line(slow_fast_gradually_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -3180,7 +3180,7 @@
 	]
     },
     {
-	"name":"horizontal_line(fast_to_slow_step_by_step_reverse)",
+	"name":"h_line(fast_slow_gradually_R)",
 	"points":
 	[
 	    { "x": 275, "y": 275, "z": 0 } ,
@@ -3253,7 +3253,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow)",
+	"name":"v_line(slow)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3351,7 +3351,7 @@
 	]
     },
     {
-	"name":"vertical_line(normal)",
+	"name":"v_line(normal)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3403,7 +3403,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast)",
+	"name":"v_line(fast)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3432,7 +3432,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow_to_fast)",
+	"name":"v_line(slow_fast)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3496,7 +3496,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast_to_slow)",
+	"name":"v_line(fast_slow)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3558,7 +3558,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow_to_fast_step_by_step)",
+	"name":"v_line(slow_fast_gradually)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3594,7 +3594,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast_to_slow_step_by_step)",
+	"name":"v_line(fast_slow_gradually)",
 	"points":
 	[
 	    { "x": 0, "y": 0, "z": 0 } ,
@@ -3667,7 +3667,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow_reverse)",
+	"name":"v_line(slow_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -3765,7 +3765,7 @@
 	]
     },
     {
-	"name":"vertical_line(normal_reverse)",
+	"name":"v_line(normal_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -3817,7 +3817,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast_reverse)",
+	"name":"v_line(fast_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -3846,7 +3846,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow_to_fast_reverse)",
+	"name":"v_line(slow_fast_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -3910,7 +3910,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast_to_slow_reverse)",
+	"name":"v_line(fast_slow_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -3972,7 +3972,7 @@
 	]
     },
     {
-	"name":"vertical_line(slow_to_fast_step_by_step_reverse)",
+	"name":"v_line(slow_fast_gradually_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
@@ -4008,7 +4008,7 @@
 	]
     },
     {
-	"name":"vertical_line(fast_to_slow_step_by_step_reverse)",
+	"name":"v_line(fast_slow_gradually_R)",
 	"points":
 	[
 	    { "x": 0, "y": 550, "z": 0 } ,
