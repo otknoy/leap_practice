@@ -190,6 +190,8 @@ function searchTimeSeries(tsQuery) {
 	score.push({
 	    name: samples[i].name,
 	    score: sdX*sdY*td,
+	    score_s: sdX*sdY,
+	    score_t: td,
 	    // parseInt(0.7*(sdX*sdY)+0.3*td)
 	    points: samples[i].points
 	});
@@ -277,7 +279,12 @@ function searchData(){
 		    append('<p/>').
 		    append(item.name).
 		    append('<br/>').
-		    append(item.score)
+		    append(item.score).
+		    append('<br/>').
+		    append(item.score_s).
+		    append('<br/>').
+		    append(item.score_t)
+	
 	    ).trigger('create');
 	    $('.view').show(img);
 
