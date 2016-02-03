@@ -23,7 +23,7 @@ function temporalPreprocess(ts) {
 	return d;
     }
 
-    function timeNormalize(array) {
+    function temporalNormalize(array) {
 	var max = Math.max.apply(null, array);
 	var min = Math.min.apply(null, array);
 	
@@ -45,7 +45,7 @@ function temporalPreprocess(ts) {
     var ts_cod = changeOfDistance(ts);
 
     // normalize
-    var ts_cod_n = timeNormalize(ts_cod);
+    var ts_cod_n = temporalNormalize(ts_cod);
 
     return ts_cod_n;    
 }
