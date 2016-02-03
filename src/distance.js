@@ -1,6 +1,8 @@
 var LinearInterpolation = require('./LinearInterpolation.js');
 var DTW = require('./dtw.js');
 
+var Distance = {};
+
 // 一次元の場合のユークリッド距離は差の絶対値に等しい
 function distance1D(p1, p2) {
     var d = Math.abs(p1 - p2);
@@ -9,13 +11,13 @@ function distance1D(p1, p2) {
 
 // 時間的類似度を求めるための前処理
 function temporalPreprocess(ts) {
-    function changeOfDistance(data) {
-	var n = data.length - 1;
+    function changeOfDistance(ts) {
+	var n = ts.length - 1;
 	var d = [];
 	for (var i = 0; i < n; i++) {
-	    var x = Math.pow(data[i+1].x - data[i].x, 2);
-	    var y = Math.pow(data[i+1].y - data[i].y, 2);
-	    var z = Math.pow(data[i+1].z - data[i].z, 2);
+	    var x = Math.pow(ts[i+1].x - ts[i].x, 2);
+	    var y = Math.pow(ts[i+1].y - ts[i].y, 2);
+	    var z = Math.pow(ts[i+1].z - ts[i].z, 2);
 	    d.push(Math.sqrt(x + y + z));
 	}
 	return d;
@@ -49,7 +51,7 @@ function temporalPreprocess(ts) {
 }
 
 // 時間的類似度を求める関数
-var temporalDistance = function(ts1, ts2) {
+Distance.temporalDistance = function(ts1, ts2) {
     var ts1_p = temporalPreprocess(ts1);
     var ts2_p = temporalPreprocess(ts2);
 
@@ -118,7 +120,7 @@ function spatialPreprocess(ts) {
     return {"x": ts_x, "y": ts_y};
 }
 
-var spatialDistance = function(ts1, ts2) {
+Distance.spatialDistance = function(ts1, ts2) {
     var ts1_p = spatialPreprocess(ts1);
     var ts2_p = spatialPreprocess(ts2);
 
@@ -131,23 +133,4 @@ var spatialDistance = function(ts1, ts2) {
     return {"x": xdist, "y": ydist};
 };
 
-
-// test
-var samples = require('./test/data.json');
-var query = samples[0];
-
-var ts1 = query.points;
-console.log(ts1.length);
-
-for (var i = 0; i < samples.length; i++) {
-    var ts2 = samples[i].points;
-
-    // temporal
-    var tdist = temporalDistance(ts1, ts2);
-
-    // spatial
-    var sdist = spatialDistance(ts1, ts2);
-
-    console.log("temporal distance: " + tdist);
-    console.log("spatial distance: {x: " + sdist.x + ", y: " + sdist.y + "}");
-}
+module.exports = Distance;
