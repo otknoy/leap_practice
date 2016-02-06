@@ -196,11 +196,11 @@ function searchTimeSeries(tsQuery) {
 	    points: samples[i].points
 	});
     }
-    score.sort(function(a,b){
-    	if(a.score < b.score) return -1;
-    	if(a.score > b.score) return 1;
-    	return 0;
-    });    
+    // score.sort(function(a,b){
+    // 	if(a.score < b.score) return -1;
+    // 	if(a.score > b.score) return 1;
+    // 	return 0;
+    // });    
     // console.log(score);
     return score;
 };
