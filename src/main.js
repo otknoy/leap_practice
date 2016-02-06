@@ -267,12 +267,16 @@ function searchData(){
     if(isRecording){
 	isRecording = false;
 	// console.log('search start');
+	var query = samples[0];
+	points = query.points;
 	result = searchTimeSeries(points);
 	// console.log(result);
+	console.log("ts1_name,ts2_name,score,score_s,score_t");
+
 	$.each(result, function(index, item){
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
-  
+
 	    $("#output").append(
 		$("<div/>").attr('class', 'view').append(img),
 		$("<div/>").attr('class', 'result').
@@ -291,6 +295,8 @@ function searchData(){
 		    append(item.score_t)
 	    ).trigger('create');
 	    $('.view').show(img);
+
+	    console.log(query.name + "," + item.name + "," + item.score + "," + item.score_s + "," + item.score_t);
 
 	    // 動的にキャンバスを作成
 	    var $canvas = $('<canvas>').attr({
