@@ -1,8 +1,7 @@
 var $ = require('jquery');
 var Leap = require('leapjs');
 
-var LinearInterpolation = require('./LinearInterpolation.js');
-var DTW = require('./dtw.js');
+var Distance = require('./distance.js');
 var Sketch = require('./sketch.js');
 
 var showColor = '#87ceeb';
@@ -139,54 +138,15 @@ function searchTimeSeries(tsQuery) {
     var n = samples.length;
     var score = [];
 
-    //時間的類似度を測る
-    //座標間の距離を測る
-    var QlineLength = changeOfDistance(tsQuery);//leapで入力した座標間の距離を測っている
-    var Qtn = timeNormalize(QlineLength);//時間的類似度を測るまえに正規化
-
-    var Qcheckpoint = LinearInterpolation.compute(tsQuery);
-
-    var ts_QX = extractAxis(Qcheckpoint, 'x');
-    var ts_QY = extractAxis(Qcheckpoint, 'y');
-    var ts_QZ = extractAxis(Qcheckpoint, 'z');
-    var ts_QZc = clear(ts_QZ);//z軸の座標を全部0にしている
-    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);//各軸の連想配列にもう一度している
-
-    var Qsn =  spaceNormalize(ts_Q);//空間的類似度を測るまえに正規化
-
-    var n_QX = extractAxis(Qsn, 'x');//x軸とy軸に分けている
-    var n_QY = extractAxis(Qsn, 'y');
-    // var n_QZ = extractAxis(Qsn, 'z');
-
-    console.log("Qtn");
-    console.log(Qtn);
-    console.log("n_QX");
-    console.log(n_QX);
-
     for (var i = 0; i < n; i++){
-	var SlineLength = changeOfDistance(samples[i].points);//座標間の距離を測っている
-	var Stn = timeNormalize(SlineLength);//時間的類似度を測るまえに正規化
+	var target = samples[i].points;
 
-	var Scheckpoint = LinearInterpolation.compute(samples[i].points);
+	var tdist = Distance.temporalDistance(tsQuery, target);
+	var sdist = Distance.spatialDistance(tsQuery, target);
 
-	var ts_SX = extractAxis(Scheckpoint, 'x');
-	var ts_SY = extractAxis(Scheckpoint, 'y');
-	var ts_SZ = extractAxis(Scheckpoint, 'z');
-	var ts_SZc = clear(ts_SZ);;//z軸の座標を全部0にしている
-	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);//各軸の連想配列にもう一度している
-	var Ssn =  spaceNormalize(ts_S);//空間的類似度を測るまえに正規化
-	var n_SX = extractAxis(Ssn, 'x');//x軸とy軸に分けている
-	var n_SY = extractAxis(Ssn, 'y');
-	// var n_QZ = extractAxis(Qsn, 'z');
-
-	// console.log("Stn");
-	// console.log(Stn);
-	// console.log("Ssn");
-	// console.log(Ssn);
-	
-	var td = DTW.distance(Qtn, Stn, distance, 30);
-	var sdX = DTW.distance(n_QX, n_SX, distance, 30);
-	var sdY = DTW.distance(n_QY, n_SY, distance, 30);
+	var td = tdist;
+	var sdX = sdist.x;
+	var sdY = sdist.y;
 	score.push({
 	    name: samples[i].name,
 	    score: sdX*sdY*td,
