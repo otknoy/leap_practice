@@ -158,10 +158,10 @@ function searchTimeSeries(tsQuery) {
     var n_QY = extractAxis(Qsn, 'y');
     // var n_QZ = extractAxis(Qsn, 'z');
 
-    console.log("Qtn");
-    console.log(Qtn);
-    console.log("n_QX");
-    console.log(n_QX);
+    // console.log("Qtn");
+    // console.log(Qtn);
+    // console.log("n_QX");
+    // console.log(n_QX);
 
     for (var i = 0; i < n; i++){
 	var SlineLength = changeOfDistance(samples[i].points);//座標間の距離を測っている
@@ -213,9 +213,9 @@ function distance(p1, p2) {
 
 function recordFinger(){
     if (isRecording) {
-	console.log('end');
+	// console.log('end');
     } else {
-	console.log('begin');
+	// console.log('begin');
 	$("#output").empty();
     }
     isRecording = !isRecording;
@@ -266,9 +266,9 @@ function drawTimeSeriesData(id, points) {
 function searchData(){
     if(isRecording){
 	isRecording = false;
-	console.log('search start');
+	// console.log('search start');
 	result = searchTimeSeries(points);
-	console.log(result);
+	// console.log(result);
 	$.each(result, function(index, item){
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
@@ -306,11 +306,11 @@ function searchData(){
 	    // 指定した id のキャンバスに points を描く
 	    drawTimeSeriesData('canvas-' + item.name, item.points);
 	});
-	console.log('search end');
-	console.log(points);
+	// console.log('search end');
+	// console.log(points);
 
     }else{
-	console.log("nothing");
+	// console.log("nothing");
     }
 }
 
