@@ -81,7 +81,7 @@ Distance.spatialDistance = function(ts1, ts2) {
 };
 
 
-// conbination of temporal and spatial distance
+// combination of temporal and spatial distance
 Distance.tsDist = function(ts1, ts2) {
     var tdist = Distance.temporalDistance(ts1, ts2);
     var sdist = Distance.spatialDistance(ts1, ts2);
