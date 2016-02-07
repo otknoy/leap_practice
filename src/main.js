@@ -56,6 +56,7 @@ function searchTimeSeries(tsQuery) {
     for (var i = 0; i < n; i++){
 	var target = samples[i].points;
 
+	// var score = Distance.tsDist(tQuery, target)
 	var tdist = Distance.temporalDistance(tsQuery, target);
 	var sdist = Distance.spatialDistance(tsQuery, target);
 
