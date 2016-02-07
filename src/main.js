@@ -1,8 +1,7 @@
 var $ = require('jquery');
 var Leap = require('leapjs');
 
-var LinearInterpolation = require('./LinearInterpolation.js');
-var DTW = require('./dtw.js');
+var Distance = require('./distance.js');
 var Sketch = require('./sketch.js');
 
 var showColor = '#87ceeb';
@@ -48,145 +47,21 @@ function getFingertip(finger){
     return point;
 }
 
-function changeOfDistance(data) {
-    var n = data.length - 1;
-    var d = [];
-    for (var i = 0; i < n; i++) {
-	var x = Math.pow(data[i+1].x - data[i].x, 2);
-	var y = Math.pow(data[i+1].y - data[i].y, 2);
-	var z = Math.pow(data[i+1].z - data[i].z, 2);
-	d.push(Math.sqrt(x + y + z));
-    }
-    return d;
-}
-
-
-function clear(data){
-    var n = data.length;
-    var d = [];
-    for (var i = 0; i < n; i++) {
-	d.push(0);
-    }
-    return d;
-}
-
-function setNormalizeArray(arrayX, arrayY, arrayZ){
-    var arrayN = [];
-    for (var i = 0; i < arrayX.length; i++) {
-	arrayN.push({
-	    x: arrayX[i],
-	    y: arrayY[i],
-	    z: arrayZ[i]
-	});
-    }
-    return arrayN;
-}
-
-function normalize(value, min, max) {
-    if(min == max){
-	var d = 0.5;
-    }else{
-	d = (value - min) / (max - min);
-    }
-    return d;
-};
-
-// points を min から max で正規化
-function spaceNormalize(points) {
-    var d = points.map(function(d) { return [d.x, d.y, d.z]; });
-    var ary = Array.prototype.concat.apply([], d);
-    var min = Math.min.apply(null, ary);
-    var max = Math.max.apply(null, ary);
-
-    var npoints = [];
-    for (var i = 0; i < points.length; i++) {
-	var p = points[i];
-	var np = {
-	    x: normalize(p.x, min, max),
-	    y: normalize(p.y, min, max),
-	    z: normalize(p.z, min, max)
-	};
-
-	npoints.push(np);
-    }
-
-    return npoints;
-}
-
-function timeNormalize(array) {
-    var max = Math.max.apply(null, array);
-    var min = Math.min.apply(null, array);
-
-    var narray = [];
-    for (var i = 0; i < array.length; i++) {
-	if(min == max){
-	    var nv = 0.5;
-	}else{
-	    nv = (array[i] - min) / (max - min);
-	}
-	narray.push(nv);
-    }
-    return narray;
-};
-
-function extractAxis(points, axis) {//各軸の座標を抜き出している
-    return points.map(function(e) { return e[axis]; });
-}
-
 function searchTimeSeries(tsQuery) {
     // スコアの計算
     // 全データ (db) との類似度を求める
     var n = samples.length;
     var score = [];
 
-    //時間的類似度を測る
-    //座標間の距離を測る
-    var QlineLength = changeOfDistance(tsQuery);//leapで入力した座標間の距離を測っている
-    var Qtn = timeNormalize(QlineLength);//時間的類似度を測るまえに正規化
-
-    var Qcheckpoint = LinearInterpolation.compute(tsQuery);
-
-    var ts_QX = extractAxis(Qcheckpoint, 'x');
-    var ts_QY = extractAxis(Qcheckpoint, 'y');
-    var ts_QZ = extractAxis(Qcheckpoint, 'z');
-    var ts_QZc = clear(ts_QZ);//z軸の座標を全部0にしている
-    var ts_Q = setNormalizeArray(ts_QX, ts_QY, ts_QZc);//各軸の連想配列にもう一度している
-
-    var Qsn =  spaceNormalize(ts_Q);//空間的類似度を測るまえに正規化
-
-    var n_QX = extractAxis(Qsn, 'x');//x軸とy軸に分けている
-    var n_QY = extractAxis(Qsn, 'y');
-    // var n_QZ = extractAxis(Qsn, 'z');
-
-    console.log("Qtn");
-    console.log(Qtn);
-    console.log("n_QX");
-    console.log(n_QX);
-
     for (var i = 0; i < n; i++){
-	var SlineLength = changeOfDistance(samples[i].points);//座標間の距離を測っている
-	var Stn = timeNormalize(SlineLength);//時間的類似度を測るまえに正規化
+	var target = samples[i].points;
 
-	var Scheckpoint = LinearInterpolation.compute(samples[i].points);
+	var tdist = Distance.temporalDistance(tsQuery, target);
+	var sdist = Distance.spatialDistance(tsQuery, target);
 
-	var ts_SX = extractAxis(Scheckpoint, 'x');
-	var ts_SY = extractAxis(Scheckpoint, 'y');
-	var ts_SZ = extractAxis(Scheckpoint, 'z');
-	var ts_SZc = clear(ts_SZ);;//z軸の座標を全部0にしている
-	var ts_S = setNormalizeArray(ts_SX, ts_SY, ts_SZc);//各軸の連想配列にもう一度している
-	var Ssn =  spaceNormalize(ts_S);//空間的類似度を測るまえに正規化
-	var n_SX = extractAxis(Ssn, 'x');//x軸とy軸に分けている
-	var n_SY = extractAxis(Ssn, 'y');
-	// var n_QZ = extractAxis(Qsn, 'z');
-
-	// console.log("Stn");
-	// console.log(Stn);
-	// console.log("Ssn");
-	// console.log(Ssn);
-	
-	var td = DTW.distance(Qtn, Stn, distance, 30);
-	var sdX = DTW.distance(n_QX, n_SX, distance, 30);
-	var sdY = DTW.distance(n_QY, n_SY, distance, 30);
+	var td = tdist;
+	var sdX = sdist.x;
+	var sdY = sdist.y;
 	score.push({
 	    name: samples[i].name,
 	    score: sdX*sdY*td,
