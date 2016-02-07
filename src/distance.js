@@ -39,15 +39,17 @@ function temporalPreprocess(ts) {
 	return narray;
     }
 
-    // linear interpolation?
-
+   
     // change of distance
     var ts_cod = changeOfDistance(ts);
 
+    // linear interpolation?
+    var ts_cod_li = LinearInterpolation.compute(ts_cod);
+    
     // normalize
-    var ts_cod_n = temporalNormalize(ts_cod);
+    var ts_cod_li_n = temporalNormalize(ts_cod_li);
 
-    return ts_cod_n;    
+    return ts_cod_li_n;    
 }
 
 // 時間的類似度を求める関数
