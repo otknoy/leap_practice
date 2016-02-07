@@ -8,6 +8,29 @@ function normalize(value, min, max) {
     return (value - min) / (max - min);
 }
 
+function normalizeArray(array, min, max) {
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var nv = normalize(array[i], min, max);
+	narray.push(nv);
+    }
+    return narray;
+}
+
+function normalizeXYZArray(array, min, max) {
+    var narray = [];
+    for (var i = 0; i < array.length; i++) {
+	var p = array[i];
+	var np = {
+	    x: normalize(p.x, min, max),
+	    y: normalize(p.y, min, max),
+	    z: normalize(p.z, min, max)
+	};
+	narray.push(np);
+    }
+    return narray;
+}
+
 // 1次元の点同士のユークリッド距離を求める関数
 // 1次元の場合のユークリッド距離は差の絶対値に等しい
 function distance1D(p1, p2) {
@@ -31,22 +54,17 @@ function changeOfDistance(ts) {
 }
 
 // 1次元時系列データをその最小値から最大値の間の値に正規化する
-function temporalNormalize(array) {
-    var max = Math.max.apply(null, array);
-    var min = Math.min.apply(null, array);
+function temporalNormalize(ts) {
+    var max = Math.max.apply(null, ts);
+    var min = Math.min.apply(null, ts);
     
     if (min == max) {
 	// create a '0.5' filled array
-	var ret = Array.apply(null, Array(array.length)).map(Number.prototype.valueOf, 0.5);
+	var ret = Array.apply(null, Array(ts.length)).map(Number.prototype.valueOf, 0.5);
 	return ret;
     }
 
-    var narray = [];
-    for (var i = 0; i < array.length; i++) {
-	var nv = normalize(array[i], min, max);
-	narray.push(nv);
-    }
-    return narray;
+    return normalizeArray(ts, min, max);
 }
 
 // 時間的類似度を求めるための前処理
@@ -88,19 +106,7 @@ function spatialNormalize(ts) {
 	return ret;
     }
 
-    var npoints = [];
-    for (var i = 0; i < ts.length; i++) {
-	var p = ts[i];
-	var np = {
-	    x: normalize(p.x, min, max),
-	    y: normalize(p.y, min, max),
-	    z: normalize(p.z, min, max)
-	};
-
-	npoints.push(np);
-    }
-
-    return npoints;
+    return normalizeXYZArray(ts, min, max);
 }
 
 // 空間的類似度を求めるための前処理
