@@ -1,7 +1,7 @@
-var Distance = require('./distance.js');
+var Distance = require('../src/distance.js');
 
 // test
-var samples = require('./test/data.json');
+var samples = require('../src/test/data.json');
 var query = samples[0];
 
 var ts1 = query.points;
