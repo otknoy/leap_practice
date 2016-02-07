@@ -3,6 +3,11 @@ var DTW = require('./dtw.js');
 
 var Distance = {};
 
+
+function normalize(value, min, max) {
+    return (value - min) / (max - min);
+}
+
 // 1次元の点同士のユークリッド距離を求める関数
 // 1次元の場合のユークリッド距離は差の絶対値に等しい
 function distance1D(p1, p2) {
@@ -30,13 +35,15 @@ function temporalNormalize(array) {
     var max = Math.max.apply(null, array);
     var min = Math.min.apply(null, array);
     
+    if (min == max) {
+	// create a '0.5' filled array
+	var ret = Array.apply(null, Array(array.length)).map(Number.prototype.valueOf, 0.5);
+	return ret;
+    }
+
     var narray = [];
     for (var i = 0; i < array.length; i++) {
-	if(min == max){
-	    var nv = 0.5;
-	}else{
-	    nv = (array[i] - min) / (max - min);
-	}
+	var nv = normalize(array[i], min, max);
 	narray.push(nv);
     }
     return narray;
@@ -68,19 +75,18 @@ Distance.temporalDistance = function(ts1, ts2) {
 
 // 3次元時系列データをその最小値から最大値の間に正規化する
 function spatialNormalize(ts) {
-    function normalize(value, min, max) {
-	if(min == max){
-	    var d = 0.5;
-	}else{
-	    d = (value - min) / (max - min);
-	}
-	return d;
-    };
-
     var d = ts.map(function(d) { return [d.x, d.y, d.z]; });
     var ary = Array.prototype.concat.apply([], d);
     var min = Math.min.apply(null, ary);
     var max = Math.max.apply(null, ary);
+
+    if (min == max) {
+	// create a '0.5' filled xyz array
+	var ret = Array.apply(null, Array(ts.length)).map(function() {
+	    return {x: 0.5, y: 0.5, z: 0.5};
+	});
+	return ret;
+    }
 
     var npoints = [];
     for (var i = 0; i < ts.length; i++) {
