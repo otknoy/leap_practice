@@ -15,6 +15,15 @@ var isRecording = false;
 var result = [];
 
 Leap.loop({enableGestures: true}, function(frame){
+    function getFingertip(finger){
+	var point = {
+	    "x": finger.tipPosition[0],
+	    "y": finger.tipPosition[1],
+	    "z": finger.tipPosition[2]
+	};
+	return point;
+    }
+
     if(frame.hands.length <= 0){
 	return;
     }
@@ -37,15 +46,6 @@ Leap.loop({enableGestures: true}, function(frame){
 
     points.push(point);
 });
-
-function getFingertip(finger){
-    var point = {
-	"x": finger.tipPosition[0],
-	"y": finger.tipPosition[1],
-	"z": finger.tipPosition[2]
-    };
-    return point;
-}
 
 function searchTimeSeries(tsQuery) {
     // スコアの計算
@@ -148,7 +148,7 @@ function searchData(){
 	$.each(result, function(index, item){
 	    var imgPath = './img/' + item.name + '.png';
 	    var img = '<img src="' + imgPath + '">';
-  
+	    
 	    $("#output").append(
 		$("<div/>").attr('class', 'view').append(img),
 		$("<div/>").attr('class', 'result').
@@ -175,7 +175,7 @@ function searchData(){
 		height: 160
 	    });
 	    // 任意の位置にキャンバスを追加
-//	    $("#output").append($canvas);
+	    //	    $("#output").append($canvas);
 	    $("#output").append(
 		$("<div/>").attr('class', 'move').append($canvas)
 	    ).trigger('create');
