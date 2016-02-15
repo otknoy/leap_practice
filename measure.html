@@ -17,7 +17,23 @@
       </div>
 
       <div id="output">
-	<div id="json">
+	<form>
+	  <p>name: <input type="text" name="name" size="40"></p>
+	  <p>
+	    wave:
+	    <select name="wave">
+	      <option value="circle-fast_slow_gradually">1</option>
+	      <option value="h_line-slow_fast_gradually">2</option>
+	      <option value="sin-fast_R">3</option>
+	      <option value="sin-slow_fast">4</option>
+	      <option value="v_line-fast_slow">5</option>
+	      <option value="v_line-slow_R">6</option>
+	    </select>
+	  </p>
+	</form>
+
+	<div>
+	  <pre><code id="json"></code></pre>
 	</div>
       </div>
     </div>
