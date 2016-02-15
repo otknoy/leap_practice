@@ -1,7 +1,5 @@
 var $ = require('jquery');
 var Leap = require('leapjs');
-
-var Distance = require('./distance.js');
 var Sketch = require('./sketch.js');
 
 var showColor = '#87ceeb';
@@ -42,3 +40,33 @@ Leap.loop({enableGestures: true}, function(frame){
 
     sketch.drawCircle(point.x, -point.y);
 });
+
+
+function startRecording() {
+    isRecording = true;
+}
+
+function stopRecording() {
+    isRecording = false;
+
+    output();
+
+    points = [];
+}
+
+$('#rec-button').click(startRecording);
+$('#search-button').click(stopRecording);
+
+
+function output() {
+    var userName = $('form [name=name]').val();
+    var wave = $('form [name=wave]').val();
+
+    var data = {};
+    data.name = userName + '-' + wave;
+    data.points = points;
+
+    var output = JSON.stringify(data, null, 2);
+
+    $('#json').text(output);
+}
