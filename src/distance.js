@@ -22,7 +22,7 @@ function temporalPreprocess(ts) {
     // normalize
     var ts_cod_n = Preprocess.temporalNormalize(ts_cod);
 
-    return ts_cod_n;    
+    return ts_cod_n;
 }
 
 // 時間的類似度を求める関数
